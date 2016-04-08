@@ -1,0 +1,25 @@
+
+<c:if test="${dow eq 1}">
+    <p>Ordering is open Monday from <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.mo}"/> to <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.fmo}"/></p>
+</c:if>  
+<c:if test="${dow eq 2}">
+    <p>Ordering is open Tuesday from <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.tu}"/> to <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.ftu}"/></p>
+</c:if>  
+<c:if test="${dow eq 3}">
+    <p>Ordering is open Wednesday from <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.we}"/> to <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.fwe}"/></p>
+</c:if>  
+<c:if test="${dow eq 4}">
+    <p>Ordering is open Thursday from <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.tr}"/> to <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.ftr}"/></p>
+</c:if>  
+
+<c:if test="${dow eq 5}">
+    <p>Ordering is open Friday from <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.fr}"/> to <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.ffr}"/></p>
+</c:if> 
+
+<c:if test="${dow eq 6}">
+    <p>Ordering is open Saturday from <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.sa}"/> to <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.fsa}"/></p>
+</c:if>    
+
+<c:if test="${dow eq 7}">
+    <p>Ordering is open Sunday from <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.su}"/> to <fmt:formatDate type="time" timeStyle="short" value="${orderTimes.fsu}"/></p>
+</c:if>  

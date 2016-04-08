@@ -1,0 +1,103 @@
+ <table class="catItems myOrderInfo">
+        <tr>
+       <td colspan="8">
+       <form action="showOrder.do" method="get" name="showOrderForm">    
+       <input type="hidden" value="${uBean.custId}"/>
+       <input type="submit" value="View Orders"/>
+       <input type="radio" value="incomplete" name="orderState" /> Incomplete
+       <input type="radio" value="complete" name="orderState"/> Completed Today
+       <input type="radio" value="all" name="orderState"/> All My Orders
+       </form>
+       </td>
+       </tr>
+       <tr>
+       <td>status</td>
+       </tr>
+       <c:forEach var="cto" items="${custTodayOrders}">
+       <tr>
+      
+       <td>Order Number: ${cto.orderId}
+        <form id="" action="${pageContext.request.contextPath}/order/custOrder/${cto.orderId}.html" method="get" name="getOrderForm">  
+       <c:if test="${cto.status eq 0}">&nbsp; Status:<font color="green" ><b> NEW</b></font></c:if>
+       <c:if test="${cto.status eq 1}">&nbsp; Status: <font color="green" ><b>IN PROGRESS</b></font></c:if>
+       <c:if test="${cto.status eq 2}">&nbsp; Status: COMPLETED</c:if>
+       <c:if test="${cto.status eq 3}">&nbsp; Status: CANCELED</c:if>
+       <input type="submit" value="View Order Details"/>
+       </form>
+       </td>
+       </tr>
+       </c:forEach>
+
+       
+      
+       <c:if test="${!empty orderDetail}">
+  <tr>
+  <td colspan="8">Details of Order# ${orderDetail[0].orderId}  
+  <c:if test="${orderDetail[0].status eq 0}">
+&nbsp; Status:<font color="green" ><b> NEW</b></font>
+ </c:if>
+ 
+ <c:if test="${orderDetail[0].status eq 1}">
+&nbsp; Status: <font color="green" ><b>IN PROGRESS</b></font>
+ </c:if>
+ 
+ <c:if test="${orderDetail[0].status eq 2}">
+ &nbsp; Status: COMPLETED
+ </c:if>
+  <c:if test="${orderDetail[0].status eq 3}">
+ &nbsp; Status: CANCELED
+ </c:if>
+   
+  <c:choose>
+  <c:when test="${orderDetail[0].delivery eq 1}">
+&nbsp;  Pick up or Delivery: <font color="#FF0000">Pick Up</font>
+  </c:when>
+  <c:otherwise>
+   Pick up or Delivery: <font color="#FF0000">Delivery</font>
+   </c:otherwise>
+   </c:choose>
+   </td>
+   </tr>
+ 
+  <tr>
+    <td colspan="8"><hr></td>
+  </tr>
+  <tr bgcolor="#E2D1B8">
+    <td colspan="2">Category</td>
+    <td colspan="2">Item</td>
+    <td>Size</td>
+    <td>Quantity</td>
+    <td>Price</td>
+    <td>Amount</td>
+  </tr>
+  <c:forEach var="od" items="${orderDetail}" varStatus="line">
+    <c:choose>
+      <c:when test="${line.count % 2 == 0}">
+        <tr bgcolor="#CCCCCC"> 
+      </c:when>
+      <c:otherwise>
+        <tr bgcolor="#F1F1F1"> 
+      </c:otherwise>
+    </c:choose>
+   <c:forEach var="li" items="${od.lineitem}">  
+    <td colspan="2">${li.menu.category}</td>
+    <td colspan="2">${li.menu.item}</td>
+    <td>${li.menu.size}</td>
+    <td>${li.quantity}</td>
+    <td><fmt:formatNumber value="${li.menu.price}" type="currency"/></td>
+    <td><fmt:formatNumber value="${li.menu.price * li.quantity}" type="currency"/></td>
+       </tr>
+  </c:forEach>
+  </c:forEach>
+     
+      <tr>
+      <td colspan="9">Pizza Toppings or Special Instructions: ${orderDetail[0].comments}</td>
+      </tr>
+  
+  <tr bgcolor="#F6F6F6">
+    <td colspan="8" align="right">Order Total:
+      <fmt:formatNumber value="${orderDetail[0].orderTotal}" type="currency"/></td>
+  </tr>
+ </c:if>
+       </table>
+  
