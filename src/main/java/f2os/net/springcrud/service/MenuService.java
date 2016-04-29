@@ -9,5 +9,6 @@ public List<Menu> getCats();
 public List<Menu> getCatItems(String cat);
 public  Menu getMenuItem(Integer productId);
  public List<Menu> getMenu();
+ public void saveMenuItem(Menu item);
     
 }

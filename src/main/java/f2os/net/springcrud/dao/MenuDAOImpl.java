@@ -2,6 +2,7 @@
 package f2os.net.springcrud.dao;
 import java.util.List;
 import f2os.net.springcrud.model.Menu;
+import f2os.net.springcrud.model.Orders;
 
 
 
@@ -59,5 +60,9 @@ List result = query.list();
     .addEntity(Menu.class)
     .setParameter("productId", productId).uniqueResult();
      }
+     
+      public void saveMenuItem(Menu item) {
+		getCurrentSession().save(item);
+	}
     
 }

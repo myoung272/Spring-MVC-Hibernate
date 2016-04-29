@@ -32,23 +32,23 @@ public class LoadMenu implements ApplicationListener<ContextRefreshedEvent>, Ser
     OrderHours orderHours;
 
     List<Menu> menuContext;
-
+    
+    @Override // method of interface ServletContextAware
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 
     @Override
-    public void onApplicationEvent(final ContextRefreshedEvent event) {
+    public  void onApplicationEvent(final ContextRefreshedEvent event) {
         System.out.println("*************** In LoadMenu class ******************");
         menu = menuService.getMenu();
         servletContext.setAttribute("menu", menu);
         catList = (TreeSet) SortMenu.uniqueCategories(menu);
         servletContext.setAttribute("cats", catList);
-        System.out.println("****************************************************");
-        System.out.println("** catList, menu, orderHours set to ServletContext *");
-        System.out.println("****************************************************");
-
-        orderHours = orderHoursService.getOrderHours(1);
+         orderHours = orderHoursService.getOrderHours(1);
         servletContext.setAttribute("orderHours", orderHours);
+        System.out.println("*****************************************************************");
+        System.out.println("** catList, menu, orderHours set to ServletContext **");
+        System.out.println("*****************************************************************");
     }
 }

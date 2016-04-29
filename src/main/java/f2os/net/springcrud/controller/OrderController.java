@@ -225,7 +225,7 @@ public class OrderController {
         Thread smsMessage = new Thread(smsJob);
         smsMessage.setName("sms thread");
         //   if(ohb.isSmsOn()){ // sms notification
-       //    smsMessage.start();
+          smsMessage.start();
         //    }
         Runnable sgmr = new SendGmailRunnable(placedOrder, user, ots, order);
         Thread orderMail = new Thread(sgmr);

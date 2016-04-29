@@ -16,6 +16,8 @@
         <link href="<c:url value="/resources/css/fos.css" />" rel="stylesheet" />
         <link href="<c:url value="/resources/css/superMariof2os.css" />" rel="stylesheet"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
+        
 
 
         <script>
@@ -98,7 +100,7 @@
     <body>
         <h2 align="center">Super Mario Spring MVC Hibernate 4.0</h2>
         <h5 align="center">  <a href="javascript:window.alert('You are in ' + (document.compatMode==='CSS1Compat'?'Standards':'Quirks') + ' mode.');">What mode am I?</a> </h5>
-        <div class="container">
+        <div class="f2os_container">
             <%@ include file="/WEB-INF/pages/header2.jspf" %>
 
             <!-- list of categories on left side of page, always displayed set as a session attribute. -->

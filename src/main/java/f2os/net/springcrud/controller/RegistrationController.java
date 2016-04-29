@@ -36,7 +36,8 @@ public class RegistrationController {
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public String processForm(@ModelAttribute(value="Registration") @Valid Customers userRegis, BindingResult result){
+    public String processForm(@ModelAttribute(value="Registration") @Valid Customers userRegis, BindingResult result) {
+        
         validator.validate(userRegis, result);
         if(result.hasErrors()){
             System.out.println("result from RegistrationController result.hasErrors "+result.getModel().entrySet());

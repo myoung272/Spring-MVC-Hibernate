@@ -15,8 +15,6 @@ public class MenuServiceImpl implements  MenuService {
     
     @Autowired
 	private MenuDAO menuDAO;
-    
-    
   
     public List<Menu> getCats() {
     return menuDAO.getCats();  
@@ -32,5 +30,9 @@ public class MenuServiceImpl implements  MenuService {
     
     public Menu getMenuItem(Integer productId){
         return menuDAO.getMenuItem(productId);
+    }
+    
+    public void saveMenuItem(Menu item) {
+        menuDAO.saveMenuItem(item);
     }
 }

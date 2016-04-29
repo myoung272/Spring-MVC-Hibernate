@@ -10,4 +10,5 @@ public interface MenuDAO {
    public List<Menu> getCatItems(String cat);
    public List<Menu> getMenu();
    public  Menu getMenuItem(Integer productId);
+   public void saveMenuItem(Menu item);
 }

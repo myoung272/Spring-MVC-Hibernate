@@ -1,4 +1,4 @@
-<%-- any content can be specified here e.g.: --%>
+
 <%@ page pageEncoding="UTF-8" %>
  <div class="header">
     <div class="logo"> <img src="<c:url value="/resources/images/super mario logo-1.jpg" />" /> </div>
@@ -8,17 +8,20 @@
     </div>
     <div class="peppers"> <img src="<c:url value="/resources/images/redgreenpeppersCrooped.jpg" />" /> </div>
     <div class="headerAddress">
-      <p> 101 Centirian Star Way, <br />
+      <p> 101 Centurion Star Way, <br />
         &nbsp; 3rd Rock Orb <br />
-        &nbsp;&nbsp; Alpha Centuri<br />
+        &nbsp;&nbsp; Alpha Centauri<br />
         &nbsp;&nbsp; &nbsp;p. 123.123.1234<br />
         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;f. 321.321.3214 </p>
     </div>
    <%-- <div class="navLinks"> <p align="right">  <a href="${pageContext.request.contextPath}/user.html?login=login">login</a> </p>  </div> --%>
-    <div class="navLinks"> <p align="right">  <a href="${pageContext.request.contextPath}/user.html?login=login">login</a> 
+    <div class="navLinks"> <p align="right">  
+      <a href="${pageContext.request.contextPath}/user.html?login=login">login</a> 
        | <a href="${pageContext.request.contextPath}/regUser.html?reg=reg">Register</a> 
+       | <a href="${pageContext.request.contextPath}/addMenuItem.html">Add Item</a> 
         <c:if test="${!empty uBean}">
        | <a href="${pageContext.request.contextPath}/order/custOrder.html">My Orders</a> 
-        </c:if></p>  </div>
+        </c:if></p>  
+    </div>
  </div>
    
