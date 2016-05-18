@@ -18,4 +18,8 @@ public class OrderHoursServiceImpl implements OrderHoursService {
          
          return orderHoursDAO.getOrderHours(id);
      }
+     
+      public void updateOrderHours(OrderHours oh){
+           orderHoursDAO.updateOrderHours(oh);
+      }
 }

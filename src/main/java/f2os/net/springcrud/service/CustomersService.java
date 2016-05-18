@@ -13,5 +13,7 @@ public List<Customers> getCustomers();
 public Customers getUser(String email, String pWord);
 
 public void updateCustomers(Customers cust);
+
+ public void createCustomer(Customers cust);
     
 }

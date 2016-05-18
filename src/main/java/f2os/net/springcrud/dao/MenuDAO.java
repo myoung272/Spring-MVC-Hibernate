@@ -11,4 +11,5 @@ public interface MenuDAO {
    public List<Menu> getMenu();
    public  Menu getMenuItem(Integer productId);
    public void saveMenuItem(Menu item);
+   public  void setAllMenuItemsInactive();
 }

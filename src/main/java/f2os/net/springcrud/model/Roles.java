@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package f2os.net.springcrud.model;
 
 import java.io.Serializable;
@@ -5,68 +10,71 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-
- 
-
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  *
  * @author Mitch
  */
-
-
 @Entity
 @Table(name = "roles")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r"),
-    @NamedQuery(name = "Roles.findByCustId", query = "SELECT r FROM Roles r WHERE r.custId = :custId"),
-    @NamedQuery(name = "Roles.findByRole", query = "SELECT r FROM Roles r WHERE r.role = :role"),
-    @NamedQuery(name = "Roles.findByRolePK", query = "SELECT r FROM Roles r WHERE r.rolePK = :rolePK")})
+    @NamedQuery(name = "Roles.findByRoleId", query = "SELECT r FROM Roles r WHERE r.roleId = :roleId"),
+    @NamedQuery(name = "Roles.findByRole", query = "SELECT r FROM Roles r WHERE r.role = :role")})
 public class Roles implements Serializable {
+
     private static final long serialVersionUID = 1L;
+   
+    @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cust_id")
-    private int custId;
+    @Column(name = "role_id")
+  //  @GeneratedValue(generator="gen")
+ //   @GenericGenerator(name="gen", strategy="foreign",parameters=@Parameter(name="property", value="customers"))
+    private Integer roleId;
+    
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    //@NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "role")
     private String role;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "role_PK")
-    private Integer rolePK;
+    
+    //@JoinColumn(name = "role_id", referencedColumnName = "CUST_ID", insertable = false, updatable = false)
+   // @OneToOne(optional = false)
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Customers customers;
 
     public Roles() {
     }
 
-    public Roles(Integer rolePK) {
-        this.rolePK = rolePK;
+    public Roles(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public Roles(Integer rolePK, int custId, String role) {
-        this.rolePK = rolePK;
-        this.custId = custId;
+    public Roles(Integer roleId, String role) {
+        this.roleId = roleId;
         this.role = role;
     }
 
-    public int getCustId() {
-        return custId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setCustId(int custId) {
-        this.custId = custId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getRole() {
@@ -77,18 +85,18 @@ public class Roles implements Serializable {
         this.role = role;
     }
 
-    public Integer getRolePK() {
-        return rolePK;
+    public Customers getCustomers() {
+        return customers;
     }
 
-    public void setRolePK(Integer rolePK) {
-        this.rolePK = rolePK;
+    public void setCustomers(Customers customers) {
+        this.customers = customers;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (rolePK != null ? rolePK.hashCode() : 0);
+        hash += (roleId != null ? roleId.hashCode() : 0);
         return hash;
     }
 
@@ -99,7 +107,7 @@ public class Roles implements Serializable {
             return false;
         }
         Roles other = (Roles) object;
-        if ((this.rolePK == null && other.rolePK != null) || (this.rolePK != null && !this.rolePK.equals(other.rolePK))) {
+        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
             return false;
         }
         return true;
@@ -107,7 +115,7 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "f2os.net.springcrud.model.Roles[ rolePK=" + rolePK + " ]";
+        return "f2os.net.springcrud.model.Roles[ roleId=" + roleId + " ]";
     }
     
 }

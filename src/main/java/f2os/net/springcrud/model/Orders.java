@@ -86,7 +86,8 @@ public class Orders implements Serializable {
     @Size(max = 2000)
     @Column(name = "comments")
     private String comments;
-    
+   
+    // WILL NOT FETCH LAZY,could not initialize proxy - no Session
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name="ORDER_ID")
     private List<Lineitem> lineitem;

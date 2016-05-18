@@ -8,4 +8,6 @@ public interface OrderHoursService {
     
     public OrderHours getOrderHours(int id);
     
+     public void updateOrderHours(OrderHours oh);
+    
 }

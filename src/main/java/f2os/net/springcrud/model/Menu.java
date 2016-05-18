@@ -37,29 +37,35 @@ public class Menu implements Serializable, Comparable<Menu> {
     @Basic(optional = false)
     @Column(name = "product_id")
     private Integer productId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "CATEGORY")
     private String category;
+    
     @Size(max = 100)
     @Column(name = "ITEM")
     private String item;
+    
     @Basic(optional = false)
-    @NotNull
+  //  @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "DESCRIPTION")
     private String description;
+    
     @Basic(optional = false)
-    @NotNull
+ //   @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "SIZE")
     private String size;
+ 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRICE")
     private BigDecimal price;
+   
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")

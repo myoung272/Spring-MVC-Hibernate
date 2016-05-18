@@ -29,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
+//@RestController
 @RequestMapping("/order")
 @SessionAttributes("orderLineItems")
 public class OrderController {

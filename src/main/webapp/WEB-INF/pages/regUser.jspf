@@ -1,19 +1,19 @@
 
-		
-		<form:form commandName="Registration" name="regForm" id="regForm">
-		<table>
-			<tr><td colspan="2"><form:errors path="*" cssStyle="color : red;"/></td></tr>
-			<tr><td>First Name : </td><td><form:input path="fname" required="required" /></td></tr>
-			<tr><td>Last Name : </td><td><form:input path="lname" required="required"  /></td></tr>
-                        <tr><td>Street : </td><td><form:input path="street"  required="required"/></td></tr>
-                        <tr><td>Town : </td><td><form:input path="city" required="required" /></td></tr>
-                        <tr><td>State : </td><td><form:input path="state" size="2" minlength="2"  maxlength="2" required="required"  /></td></tr>
-                        <tr><td>Zip : </td><td><form:input path="zip"  name="zip" size="5"  required="required" minlength="5" maxlength="5"/></td></tr>
-			<tr><td>Email : </td><td><form:input path="email" name="email" type="email" id="email" required="required"  /></td></tr>
-			<tr><td>Phone : </td><td><form:input path="phone" type="tel" required="required"/></td></tr>
-			<tr><td>Password : </td><td><form:password path="password" minlength="6" required="required"/></td></tr>
-			<tr><td>Retype Password : </td><td><form:password path="rePassword" minlength="6" required="required" /></td></tr>
-			<tr><td colspan="2"><input type="submit" value="Register" /></td></tr>
-		</table>
-		</form:form>
-	
+<div>
+<form:form commandName="Registration" name="regForm" id="regForm">
+    <table>
+        <tr><td colspan="2"><form:errors path="*" cssStyle="color : red;"/></td></tr>
+        <tr><td>First Name : </td><td><form:input path="fname" required="required" /></td></tr>
+        <tr><td>Last Name : </td><td><form:input path="lname" required="required"  /></td></tr>
+        <tr><td>Street : </td><td><form:input path="street"  required="required"/></td></tr>
+        <tr><td>Town : </td><td><form:input path="city" required="required" /></td></tr>
+        <tr><td>State : </td><td><form:input path="state" size="2" minlength="2"  maxlength="2" required="required"  /></td></tr>
+        <tr><td>Zip : </td><td><form:input path="zip"  name="zip" size="5"  required="required" minlength="5" maxlength="5"/></td></tr>
+        <tr><td>Email : </td><td><form:input path="email" name="email" type="email" id="email" required="required"  /></td></tr>
+        <tr><td>Phone : </td><td><form:input path="phone" type="tel" required="required"/></td></tr>
+        <tr><td>Password : </td><td><form:password path="password" minlength="6" required="required"/></td></tr>
+        <tr><td>Retype Password : </td><td><form:password path="rePassword" minlength="6" required="required" /></td></tr>
+        <tr><td colspan="2"><input type="submit" value="Register" /></td></tr>
+    </table>
+</form:form>
+</div>

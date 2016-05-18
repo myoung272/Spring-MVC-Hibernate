@@ -15,5 +15,4 @@
         <property name="basename" value="/WEB-INF/messages" />
         <property name="cacheSeconds" value="3000" />
     </bean>
-
 </beans>

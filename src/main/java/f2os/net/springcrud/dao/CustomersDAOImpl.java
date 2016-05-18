@@ -49,6 +49,9 @@ public class CustomersDAOImpl implements CustomersDAO {
 		getCurrentSession().update(cust);
 		
 	}
+        public void createCustomer(Customers cust) {
+          getCurrentSession().save(cust);
+        }
             
         }
 

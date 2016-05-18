@@ -50,10 +50,12 @@ public class Lineitem implements Serializable {
     
     @Column(name = "InvoiceID")
     private int invoiceID;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "product_id")
     private int productID;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Quantity")

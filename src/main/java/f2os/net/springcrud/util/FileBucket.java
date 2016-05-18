@@ -1,0 +1,22 @@
+
+package f2os.net.springcrud.util;
+
+
+import org.springframework.web.multipart.MultipartFile;
+ 
+public class FileBucket {
+ 
+    MultipartFile file;
+     
+    public MultipartFile getFile() {
+        return file;
+    }
+ 
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+    
+    public String toString() {
+        return file.getOriginalFilename()+" "+file.getContentType();
+    }
+}

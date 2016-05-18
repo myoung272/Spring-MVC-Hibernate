@@ -17,6 +17,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -27,7 +28,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @ComponentScan("f2os.net.springcrud")
 @EnableWebMvc
 @EnableTransactionManagement
-@ImportResource({"classpath:spring-mail.xml", "classpath:spring-web-servlet-config.xml"})
+@ImportResource({"classpath:spring-mail.xml", "classpath:spring-web-servlet-config.xml","classpath:hibernate.cfg.xml"})
 @PropertySource("classpath:application.properties")
 public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvcConfigurerAdapter
 	
@@ -39,6 +40,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvc
     private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
+     private static final String PROPERTY_NAME_ENTITY_CLASSES_DIR  = "f2os.net.springcrud.model";
     
     @Override // M.Y. added
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
@@ -46,13 +48,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvc
     System.out.println("******** IN CLASS WebAppConfig.addResurceHandlers *****************" );
     }
    
-    
-    /* @Override
-  public void   configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-    configurer.enable();
-  }
-    */
-
+ 
     
 	@Resource
 	private Environment env;
@@ -75,6 +71,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvc
 		sessionFactoryBean.setDataSource(dataSource());
 		sessionFactoryBean.setPackagesToScan(env.getRequiredProperty(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN));
 		sessionFactoryBean.setHibernateProperties(hibProperties());
+                                //    sessionFactoryBean.setMappingDirectoryLocations(env.getRequiredProperty(PROPERTY_NAME_ENTITY_CLASSES_DIR));
 		return sessionFactoryBean;
 	}
 	
@@ -100,4 +97,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvc
 		resolver.setViewClass(JstlView.class);
 		return resolver;
 	}
+       @Bean(name = "multipartResolver")
+    public StandardServletMultipartResolver resolver() {
+        return new StandardServletMultipartResolver();
+    }
+
 }

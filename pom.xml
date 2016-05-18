@@ -16,24 +16,38 @@
        
         <hibernate.version>4.2.0.Final</hibernate.version>
         <mysql.connector.version>5.1.21</mysql.connector.version>
-        <spring.version>3.2.2.RELEASE</spring.version>
+        <!--    <spring.version>3.2.2.RELEASE</spring.version> -->
+        <spring.version>4.0.0.RELEASE</spring.version>
+        <jackson.version>2.5.3</jackson.version>
     
     </properties>
     
     <dependencies>
         
         <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-validator</artifactId>
-    <version>4.2.0.Final</version>
-</dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.10-FINAL</version>
+        </dependency>
+      
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.10-FINAL</version>
+        </dependency>
         
-   <!--     <dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>4.1.0.Final</version>
+            <version>4.2.0.Final</version>
         </dependency>
-    -->  
+        
+        <!--     <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>4.1.0.Final</version>
+            </dependency>
+        -->  
         
         <dependency>
             <groupId>jaxen</groupId>
@@ -125,7 +139,16 @@
             <scope>compile</scope>
         </dependency>
         
-      <!--  <dependency>
+        <!-- MY added for RestController -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        
+        <!-- END MY added for RestController -->
+        <!-- below was commented out -->
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
@@ -146,7 +169,8 @@
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        -->
+        
+        <!--END below was commented out -->
         <!-- End MY added -->
         <!-- CGLIB is required to process @Configuration classes -->
         <dependency>

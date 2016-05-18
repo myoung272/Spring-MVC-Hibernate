@@ -21,5 +21,10 @@ public class OrderHoursDAOImpl implements OrderHoursDAO {
         OrderHours orderHours = (OrderHours) getCurrentSession().get(OrderHours.class, id);
         return orderHours;
     }
+    
+    @Override
+    public void updateOrderHours(OrderHours oh) {
+       getCurrentSession().update(oh);
+    }
 
 }

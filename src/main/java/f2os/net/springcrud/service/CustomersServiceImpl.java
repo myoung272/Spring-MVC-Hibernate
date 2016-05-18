@@ -1,4 +1,3 @@
- 
 package f2os.net.springcrud.service;
 
 import java.util.List;
@@ -15,19 +14,22 @@ import f2os.net.springcrud.model.Customers;
 public class CustomersServiceImpl implements CustomersService {
     
     @Autowired
-	private CustomersDAO customersDAO;
+    private CustomersDAO customersDAO;
     
-    
-  
     public List<Customers> getCustomers() {
-		return customersDAO.getCustomers();  
-	}
-   
-    public Customers getUser(String email, String pWord){
-       return customersDAO.getUser(email, pWord);
+        return customersDAO.getCustomers();        
     }
     
-    public void updateCustomers(Customers cust){
+    public Customers getUser(String email, String pWord) {
+        return customersDAO.getUser(email, pWord);
+    }
+    
+    public void updateCustomers(Customers cust) {
         customersDAO.updateCustomers(cust);
     }
+    
+    public void createCustomer(Customers cust) {
+        customersDAO.createCustomer(cust);
+    }
+    
 }
