@@ -50,13 +50,13 @@ public class Menu implements Serializable, Comparable<Menu> {
     
     @Basic(optional = false)
   //  @NotNull
-    @Size(min = 1, max = 200)
+  //  @Size(min = 1, max = 200)
     @Column(name = "DESCRIPTION")
     private String description;
     
     @Basic(optional = false)
  //   @NotNull
-    @Size(min = 1, max = 10)
+  //  @Size(min = 1, max = 10)
     @Column(name = "SIZE")
     private String size;
  

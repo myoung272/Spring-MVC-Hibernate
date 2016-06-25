@@ -1,0 +1,120 @@
+<!-- class="catItems myOrderInfo" 
+<div class="divTD"> -->
+<div class="catItems container" >
+<table >
+    <tr>
+        <td colspan="10" style=" text-align: left;">
+            <form method="get" action="${pageContext.request.contextPath}/findOrders">
+                <input type="submit" value="View Orders"/>
+                <input type="radio" value="0" name="ordersToFind" checked="checked" /> New
+                <input type="radio" value="1" name="ordersToFind"/> In Progress
+                <input type="radio" value="2" name="ordersToFind"/>Completed Today
+            </form>
+        </td>
+    </tr>
+    <tr bgcolor="#66ccff">
+        <td>Name</td>
+        <td>Phone</td>
+        <td>Address</td>
+        <td>Town</td>
+        <td>State</td>
+        <td>Zip</td>
+        <td>Customer Number</td>
+        <td>Time Ordered</td>
+        <td>Time Completed</td>
+        <td>Total Orders</td>
+    </tr>
+    <tr bgcolor="">
+        <td>${orderDetail[0].customer.fname}&nbsp;${orderDetail[0].customer.lname}</td>
+        <td>${orderDetail[0].customer.phone}</td>
+        <td>${orderDetail[0].customer.street}</td>
+        <td>${orderDetail[0].customer.city}</td>
+        <td>${orderDetail[0].customer.state}</td>
+        <td>${orderDetail[0].customer.zip}</td>
+        <td>${orderDetail[0].customer.custId}</td>
+        <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${orderDetail[0].dateEntered}" /></td>
+<td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${orderDetail[0].dateComplete}" /></td>
+<td>${orderDetail[0].customer.totalOrders}</td>
+</tr>
+<tr >
+        <td colspan="10" style=" text-align: left;">Details of Order# ${orderDetail[0].orderId}  
+    <c:if test="${orderDetail[0].status eq 0}">
+        &nbsp; Status:<font color="green" ><b> NEW</b></font>
+    </c:if>
+
+    <c:if test="${orderDetail[0].status eq 1}">
+        &nbsp; Status: <font color="blue" ><b>IN PROGRESS</b></font>
+    </c:if>
+
+    <c:if test="${orderDetail[0].status eq 2}">
+        &nbsp; Status: <font color="red" ><b>COMPLETED</b></font>
+    </c:if>
+    <c:if test="${orderDetail[0].status eq 3}">
+        &nbsp; Status: CANCELED
+    </c:if>
+
+    <c:choose>
+        <c:when test="${orderDetail[0].delivery eq 1}">
+            &nbsp;  Pick up or Delivery: <font color="#FF0000">Pick Up</font>
+        </c:when>
+        <c:otherwise>
+            Pick up or Delivery: <font color="#FF0000">Delivery</font>
+        </c:otherwise>
+    </c:choose>
+    </td>
+    </tr>
+    <tr bgcolor="#66ccff">
+        <td >Category</td>
+        <td colspan="2" class="itemTD">Item</td>
+        <td>Product ID</td>
+        <td colspan="2">Description</td>
+        <td>Size</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Amount</td>
+    </tr>
+    <c:forEach var="od" items="${orderDetail}" varStatus="line">
+        <tr>
+        
+        <c:forEach var="li" items="${od.lineitem}">  
+             <tr>
+            <td >${li.menu.category}</td>
+            <td colspan="2">${li.menu.item}</td>
+            <td>${li.productID}</td>
+            <td colspan="2">${li.menu.description}</td>
+            <td>${li.menu.size}</td>
+            <td>${li.quantity}</td>
+            <td><fmt:formatNumber value="${li.menu.price}" type="currency"/></td>
+            <td><fmt:formatNumber value="${li.menu.price * li.quantity}" type="currency"/></td>
+            </tr>
+        </c:forEach>
+        
+    </c:forEach>
+
+    <tr>
+        <td colspan="10" style=" text-align: left;">Pizza Toppings or Special Instructions:<b> ${orderDetail[0].comments}</b></td>
+    </tr>
+
+    <tr bgcolor="#F6F6F6">
+        <td colspan="10" style=" text-align: right;">Order Total:
+    <fmt:formatNumber value="${orderDetail[0].orderTotal}" type="currency"/></td>
+    </tr>
+    <tr>
+       <td colspan="10" style=" text-align: left;">
+             
+        <form method="get" action="${pageContext.request.contextPath}/updateOrder">
+             <input type="hidden" name="orderId" value="${orderDetail[0].orderId}"/>
+                <input type="submit" value="Update Order Status"/>
+                <input type="radio" value="1" name="orderState" checked="checked" /> In Progress
+                <input type="radio" value="2" name="orderState"/> Completed
+                <input type="radio" value="3" name="orderState"/> Canceled
+        <%--    <input type="text" id="datepicker">  --%>
+        </form>
+        </td>
+    </tr>
+
+</table>
+    
+</div>
+    
+    

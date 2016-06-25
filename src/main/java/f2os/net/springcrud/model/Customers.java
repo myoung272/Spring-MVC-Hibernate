@@ -26,6 +26,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import f2os.net.springcrud.util.Validate;
+
 
 @Entity
 @Table(name = "customers")
@@ -111,9 +113,10 @@ public class Customers implements Serializable {
     @Column(name = "city")
     @NotEmpty(message = "Town field is mandatory")
     private String city;
-    @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
-    
-   // @Length(max=10,min=10,message="Phone number is not valid. Should be of length 10.")
+   
+   @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone format, should be as xxx-xxx-xxxx") //if the field contains phone or fax number consider using this annotation to enforce field validation
+    //                             /^(?:\(\d{3}\)|\d{3}-)\d{3}-\d{4}$/
+   // @Pattern(regexp="/^(?:\\(\\d{3}\\)|\\d{3}-)\\d{3}-\\d{4}$/", message="Invalid phone format, should be as xxx-xxx-xxxx")
     @NotEmpty(message="Phone field is mendatory.") 
   //  @NumberFormat(style= Style.NUMBER)
     private String phone;
@@ -227,6 +230,7 @@ public class Customers implements Serializable {
     }
 
     public String getPhone() {
+  
         return phone;
     }
 
@@ -235,6 +239,7 @@ public class Customers implements Serializable {
     }
 
     public String getFaxPhone() {
+       
         return faxPhone;
     }
 

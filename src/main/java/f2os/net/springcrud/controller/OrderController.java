@@ -144,10 +144,16 @@ public class OrderController {
           }
          return modelAndView;
      }
-     // SHOW SINGLE ORDER DETAILS
+     // SHOW SINGLE ORDER DETAILS 
       @RequestMapping(value = "/custOrder/{id}", method = RequestMethod.GET)
      public ModelAndView showOrderDetails(Model model, @PathVariable int id, HttpSession session) {
-         ModelAndView modelAndView = new ModelAndView("home");
+           Customers user = (Customers) session.getAttribute("uBean");
+           ModelAndView modelAndView = new ModelAndView("home");
+          
+           if(user.getRole().getRole().equalsIgnoreCase("admin")){
+            modelAndView.setViewName("adminOrders");
+           }
+          
           List<Orders> orderDetail = ordersService.showOrderDetails(id);
           System.out.println("from showOrderDetails "+orderDetail);
            modelAndView.addObject("orderDetail",orderDetail);
@@ -179,10 +185,17 @@ public class OrderController {
         for (Menu m : orderList) {
             total += (m.getPrice().doubleValue() * m.getQuantity());
         }
+        if(total < 10 && pickOrDel.startsWith("Del") ){
+             String message = "Your order is below the Delivery cost, Please select Pick Up instead";
+             modelAndView.addObject("message", message);
+            return modelAndView;
+        }
+        
         System.out.println("Total order price is " + total);
           if (pickOrDel.equals("Delivery")) {
         ots.setDeliveryCharge(1); // need to  pull from props file or admin input page  
          }
+         
         ots.setSubTotal(total + ots.getDeliveryCharge());
         ots.setSalesTax(ots.getSubTotal() * .07); // need to  pull from props file
         ots.setTotal(ots.getSubTotal() + ots.getSalesTax());
@@ -206,9 +219,12 @@ public class OrderController {
         order.setCustId(id);
         order.setOrderTotal(new BigDecimal(orderTotal));
         order.setComments(comments);
-        order.setDelivery(id);
+        int pickDel = 1;
+        if(pickOrDel.equalsIgnoreCase("Delivery")){
+             pickDel = 0;
+        }
+        order.setDelivery(pickDel);
         order.setLineitem(li);
-
         placedOrder.addAll(orderList); // orderlist which is session scoped will be cleared in this method,
         //so we neee a request scoped list for the confirmation to the user 
         System.out.println("placedOrder contains " + placedOrder);
@@ -226,9 +242,9 @@ public class OrderController {
         Runnable smsJob = new SendSmsRunnable("New Order Received from Super Mario Pizza, Check the web site! order#  " + order.getOrderId(), smsNum);
         Thread smsMessage = new Thread(smsJob);
         smsMessage.setName("sms thread");
-        //   if(ohb.isSmsOn()){ // sms notification
+          if(ohs.getSmsOn()) { // sms notification
           smsMessage.start();
-        //    }
+            }
         Runnable sgmr = new SendGmailRunnable(placedOrder, user, ots, order);
         Thread orderMail = new Thread(sgmr);
         orderMail.start();

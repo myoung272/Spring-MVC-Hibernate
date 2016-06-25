@@ -15,6 +15,8 @@ import f2os.net.springcrud.model.Roles;
 import f2os.net.springcrud.service.CustomersService;
 import f2os.net.springcrud.service.RolesService;
 import f2os.net.springcrud.util.RegistrationValidator;
+import javax.validation.Validator;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/regUser")
@@ -22,11 +24,12 @@ public class RegistrationController {
 
     @Autowired
     private CustomersService customersService;
-    
+
     @Autowired
     private RolesService rolesService;
 
-    RegistrationValidator validator = null;
+    //  RegistrationValidator validator = null;
+    private RegistrationValidator validator;
 
     public RegistrationValidator getValidator() {
         return validator;
@@ -45,25 +48,26 @@ public class RegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processForm(@ModelAttribute(value = "Registration") @Valid Customers userRegis, BindingResult result) {
-      userRegis.setTotalOrders(0);
-      customersService.createCustomer(userRegis);
-      Roles role = new Roles();
-       role.setRole("customer");
-       role.setRoleId(userRegis.getCustId());
-       userRegis.setRole(role);
-       
-       validator.validate(userRegis, result);
+    public ModelAndView processForm(@ModelAttribute(value = "Registration") @Valid Customers userRegis, BindingResult result) {
+        ModelAndView mav = new ModelAndView("home");
+        if (result.hasErrors()) {
+            return mav;
+        }
+        validator.validate(userRegis, result);
         if (result.hasErrors()) {
             System.out.println("result from RegistrationController result.hasErrors " + result.getModel().entrySet());
-            return "home";
-        } 
-        
-        else {
-             
+            return mav;
+        } else {
+            userRegis.setTotalOrders(0);
+            customersService.createCustomer(userRegis);
+            Roles role = new Roles();
+            role.setRole("customer");
+            role.setRoleId(userRegis.getCustId());
+            userRegis.setRole(role);
             System.out.println("result from RegistrationController no errors" + result.getModel().entrySet());
-           customersService.updateCustomers(userRegis);
-            return "home";
+            customersService.updateCustomers(userRegis);
+            return mav;
+          
         }
     }
 }

@@ -13,13 +13,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <title>Super Mario Pizza</title>
+          <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
         <link href="<c:url value="/resources/css/fos.css" />" rel="stylesheet" />
-        <link href="<c:url value="/resources/css/superMariof2os.css" />" rel="stylesheet"/>
+        <link href="<c:url value="/resources/css/superMariof2os.css" />" rel="stylesheet"/> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         
-        
-
-
         <script>
             counter = 0;
             function validatePickOrDel(form) {
@@ -169,7 +168,7 @@
                                         <th class="itemHeader">Category</th>
                                         <th class="itemHeader">Item</th>
                                         <th class="itemHeader">Size</th>
-                                            <%--   <td class="itemHeader">Description</td>--%>
+                                        <th class="itemHeader">Description</th>
                                         <th class="itemHeader">Price</th>
                                         <th class="itemHeader">Add to Order</th>
                                     </tr>
@@ -196,9 +195,9 @@
                                                 <input type="hidden" name="size" value="${cm.size}" />
                                             </td>
 
-                                            <%-- <td>${cm.description}
+                                             <td>${cm.description}
                                                <input type="hidden" name="description" value="${cm.description}"/>
-                                               </td>--%>
+                                               </td>
                                             <td>
                                                 <fmt:formatNumber value="${cm.price}" type="currency" />
                                                 <input type="hidden" name="price" value="${cm.price}" />
@@ -206,7 +205,7 @@
                                             <td>
                                                 <form:form id="" name="orderItemForm" method="get" commandName="order" action="${pageContext.request.contextPath}/order/orderItems/${cm.productId}.html">
                                                     <input class="order" type="text" size="2" name="pQuant" value="1" />
-                                                    <input class="order"   type="button"  value="Add to Order" /> 
+                                                    <input class="order"   type="button"  value="Add to Order" class="btn btn-primary btn-sm" /> 
                                                 </form:form>
                                             </td> 
                                         </tr> 
@@ -254,7 +253,7 @@
                                                 <form action="${pageContext.request.contextPath}/order/update/${o.productId}" name="updateItem" method="post">
                                                     <input class="order" type="text" size="2" name="updateOrderQuant"  value="${o.quantity}" />
                                                     <input type="hidden" name="updateIndex" value="${line.count}" />
-                                                    <input class="order" type="submit" value="Update" />
+                                                    <input class="order" type="submit" value="Update" class="btn btn-primary btn-sm" />
                                                 </form>
                                             </td>
                                             <td>${o.price}</td>
@@ -351,18 +350,18 @@
                                          <input type="hidden" name="pickOrDel" value="${param.pickOrDel}"/>
                                  </td>
                                 </tr>
+                                <c:if test="${param.pickOrDel eq 'Delivery' && orderTotals.total -1 < 11 }">
                                 <tr>
                                     <td colspan="6" align="right">
-                                        <c:if test="${param.pickOrDel eq 'Delivery' && orderTotals.total -1 < 11 }">
                                             <font color="#FF0000"> Your order items must be $10 or more for delivery.</font>
                                             <form:form name="backForm" method="get" action="${pageContext.request.contextPath}/order/pickDel.html">
                                                 <input type="hidden" name="pickOrDel" value="${param.pickOrDel}"/>
                                                 <input type="hidden" name="backButton" value="1"/>
                                                 <input type="submit" value="Back"  />
                                             </form:form>
-                                        </c:if>
                                     </td>
                                 </tr>
+                                </c:if>
                         </table>
                     </form:form>                
                 </c:if>
@@ -440,14 +439,14 @@
                 <table >
                     <c:if test="${! empty uBean}">
                         <tr>
-                            <td class="addressTextColor" align="center">Welcome ${uBean.fname} ${uBean.lname}</td>
+                            <td class="addressTextColor" align="center">Welcome ${uBean.fname}&nbsp;${uBean.lname}</td>
                         </tr>
                     </c:if>
                     <tr>
                         <td><h4 align="center">Order Times:</h4></td>
                     </tr>
                     <c:choose>
-                        <c:when test="${orderTimes.on eq 'true'}">
+                        <c:when test="${orderTimes.on eq '1'}">
                             <tr>
                                 <td colspan="7"><%@ include file="/WEB-INF/pages/orderTimes.jspf"%></td>
 

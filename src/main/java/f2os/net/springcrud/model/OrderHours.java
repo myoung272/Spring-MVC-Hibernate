@@ -1,7 +1,9 @@
 package f2os.net.springcrud.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Time;
+//import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,12 +38,15 @@ public class OrderHours implements Serializable {
     @Column(name = "mo")
  //   @Temporal(TemporalType.TIME)
     private Time mo;
+  
     @Column(name = "tu")
 //    @Temporal(TemporalType.TIME)
     private Time tu;
+    
     @Column(name = "we")
-//    @Temporal(TemporalType.TIME)
+//   @Temporal(TemporalType.TIME)
     private Time we;
+ 
     @Column(name = "tr")
 //    @Temporal(TemporalType.TIME)
     private Time tr;
@@ -55,51 +60,51 @@ public class OrderHours implements Serializable {
   //  @Temporal(TemporalType.TIME)
     private Time su;
     @Basic(optional = false)
-    @NotNull
+ //   @NotNull
     @Column(name = "fmo")
   //  @Temporal(TemporalType.TIME)
     private Time fmo;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "ftu")
   //  @Temporal(TemporalType.TIME)
     private Time ftu;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "fwe")
   //  @Temporal(TemporalType.TIME)
     private Time fwe;
     @Basic(optional = false)
-    @NotNull
+ //   @NotNull
     @Column(name = "ftr")
   //  @Temporal(TemporalType.TIME)
     private Time ftr;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "ffr")
  //   @Temporal(TemporalType.TIME)
     private Time ffr;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "fsa")
  //   @Temporal(TemporalType.TIME)
     private Time fsa;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "fsu")
  //   @Temporal(TemporalType.TIME)
     private Time fsu;
     
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "on")
-    private boolean on;
+ //   @NotNull
+    @Column(name = "[on]") // on is in square brackets because on is a MySql keyword
+    private Integer on;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "sms_on")
     private boolean smsOn;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "fax_on")
     private boolean faxOn;
      
@@ -116,7 +121,7 @@ public class OrderHours implements Serializable {
         this.id = id;
     }
 
-    public OrderHours(Integer orderHoursId, Time fmo, Time ftu, Time fwe, Time ftr, Time ffr, Time fsa, Time fsu,  boolean on, boolean smsOn, boolean faxOn) {
+    public OrderHours(Integer orderHoursId, Time fmo, Time ftu, Time fwe, Time ftr, Time ffr, Time fsa, Time fsu, Integer on, boolean smsOn, boolean faxOn) {
         this.id = id;
         this.fmo = fmo;
         this.ftu = ftu;
@@ -245,13 +250,7 @@ public class OrderHours implements Serializable {
 
     
 
-    public boolean getOn() {
-        return on;
-    }
-
-    public void setOn(boolean on) {
-        this.on = on;
-    }
+  
 
     public boolean getSmsOn() {
         return smsOn;
@@ -309,5 +308,24 @@ public class OrderHours implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    /**
+     * @return the on
+     */
+    public Integer getOn() {
+        return on;
+    }
+
+    /**
+     * @param on the on to set
+     */
+    public void setOn(Integer on) {
+        this.on = on;
+    }
+
+    
+
+
+   
     
 }

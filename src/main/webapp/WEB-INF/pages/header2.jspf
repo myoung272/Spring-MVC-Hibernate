@@ -18,10 +18,13 @@
     <div class="navLinks"> <p align="right">  
       <a href="${pageContext.request.contextPath}/user.html?login=login">login</a> 
        | <a href="${pageContext.request.contextPath}/regUser.html?reg=reg">Register</a> 
-       | <a href="${pageContext.request.contextPath}/addMenuItem.html">Add Item</a> 
+     
         <c:if test="${!empty uBean}">
        | <a href="${pageContext.request.contextPath}/order/custOrder.html">My Orders</a> 
-        </c:if></p>  
+        </c:if>
+        <c:if test="${uBean.role.role eq 'admin'}">
+         |  <a href="${pageContext.request.contextPath}/addMenuItem.html">Admin Pages</a> 
+        </c:if>
     </div>
  </div>
    

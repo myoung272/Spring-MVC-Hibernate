@@ -1,5 +1,5 @@
  <table class="catItems myOrderInfo">
-        <tr>
+   <%--     <tr>
        <td colspan="8">
        <form action="showOrder.do" method="get" name="showOrderForm">    
        <input type="hidden" value="${uBean.custId}"/>
@@ -13,15 +13,16 @@
        <tr>
        <td>status</td>
        </tr>
+   --%>
        <c:forEach var="cto" items="${custTodayOrders}">
        <tr>
       
-       <td>Order Number: ${cto.orderId}
+       <td>Order Number: ${cto.orderId} 
         <form id="" action="${pageContext.request.contextPath}/order/custOrder/${cto.orderId}.html" method="get" name="getOrderForm">  
-       <c:if test="${cto.status eq 0}">&nbsp; Status:<font color="green" ><b> NEW</b></font></c:if>
-       <c:if test="${cto.status eq 1}">&nbsp; Status: <font color="green" ><b>IN PROGRESS</b></font></c:if>
-       <c:if test="${cto.status eq 2}">&nbsp; Status: COMPLETED</c:if>
-       <c:if test="${cto.status eq 3}">&nbsp; Status: CANCELED</c:if>
+       <c:if test="${cto.status eq 0}">&nbsp; Status:<font color="green" ><b> NEW</b></font></c:if> 
+       <c:if test="${cto.status eq 1}">&nbsp; Status: <font color="blue" ><b>IN PROGRESS</b></font></c:if>
+       <c:if test="${cto.status eq 2}">&nbsp; Status: <font color="red" ><b>COMPLETED</b></font></c:if>
+       &nbsp;<c:if test="${cto.status eq 3}">&nbsp; Status: CANCELED</c:if>
        <input type="submit" value="View Order Details"/>
        </form>
        </td>

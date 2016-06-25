@@ -12,11 +12,13 @@ import f2os.net.springcrud.util.SortMenu;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -24,6 +26,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,12 +55,13 @@ public class AddMenuItemController implements ServletContextAware {
         return modelAndView;
     }
 
+    // ADD SINGLE ITEM 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView uploadSingleMenuItemToDB(@ModelAttribute Menu addItem) {
         System.out.println("In processForm of AddMenuItemController" + addItem);
         menuService.saveMenuItem(addItem);
         String message = "Menu item:  " + addItem.getItem() + " was successfully added.";
-        ModelAndView modelAndView = new ModelAndView("home"); 
+        ModelAndView modelAndView = new ModelAndView("addMenuItem"); 
         modelAndView.addObject("message", message);
         modelAndView.addObject("addItem", new Menu());
         // Reload Menu and catList after new menu item added
@@ -65,16 +69,44 @@ public class AddMenuItemController implements ServletContextAware {
         return modelAndView;
     }
     
+    // EDIT MENU ITEM
+   @RequestMapping(value="/edit" ,method = RequestMethod.POST)
+   public ModelAndView editMenuItem( HttpServletRequest request) {
+         ModelAndView modelAndView = new ModelAndView("addMenuItem"); 
+       Menu m = new Menu();
+       m.setProductId(Integer.parseInt(request.getParameter("productId")));
+       m.setCategory(request.getParameter("category"));
+       m.setItem(request.getParameter("item"));
+       m.setPrice(new BigDecimal(request.getParameter("price")));
+       m.setSize(request.getParameter("size"));
+       m.setDescription(request.getParameter("description"));
+       menuService.editMenuItem(m);
+       reloadMenuAndCatList();
+          modelAndView.addObject("menuList", menu);
+        return modelAndView;
+   }
+   
+   // REMOVE ITEM
+   @RequestMapping(value="/remove" ,method = RequestMethod.POST)
+   public ModelAndView removeMenuItem( HttpServletRequest request) {
+       menuService.removeMenuItem(Integer.parseInt(request.getParameter("productId")));
+         ModelAndView modelAndView = new ModelAndView("addMenuItem"); 
+          reloadMenuAndCatList();
+          modelAndView.addObject("menuList", menu);
+          return modelAndView;
+   }
+    
       @RequestMapping(value="/uploadEx" ,method = RequestMethod.GET)
     public ModelAndView showuploadExcelForm() {
         ModelAndView modelAndView = new ModelAndView("uploadExcel");
         modelAndView.addObject("fileBucket", new FileBucket());
         return modelAndView;
     }
-    
+     
+    // UPLOAD MENU FROM EXCEL SHEET
      @RequestMapping(value = "/uploadEx", method = RequestMethod.POST)
     public ModelAndView uploadExcelToDB(@ModelAttribute FileBucket fb) throws Exception {
-      ModelAndView modelAndView = new ModelAndView("home");
+      ModelAndView modelAndView = new ModelAndView("redirect:/");
       menuService.setAllMenuItemsInactive();
      System.out.println("In handelFormUpload file name is: "+fb);
     ByteArrayInputStream bis = new ByteArrayInputStream(fb.getFile().getBytes());

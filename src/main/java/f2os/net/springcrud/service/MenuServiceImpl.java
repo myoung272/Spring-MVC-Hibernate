@@ -36,6 +36,14 @@ public class MenuServiceImpl implements  MenuService {
         menuDAO.saveMenuItem(item);
     }
     
+    public void editMenuItem(Menu item) {
+        menuDAO.editMenuItem(item);
+    }
+     public void removeMenuItem(int id){
+         menuDAO.removeMenuItem(id);
+     }
+            
+    
     public  void setAllMenuItemsInactive() {
         menuDAO.setAllMenuItemsInactive();
     }

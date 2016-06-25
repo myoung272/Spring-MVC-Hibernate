@@ -51,6 +51,11 @@ public class LoginController {
         try {
          //   userBean = customersService.getUser(user.getEmail(), user.getPassword());
               user = customersService.getUser(user.getEmail(), user.getPassword());
+              if(user.getRole().getRole().equalsIgnoreCase("admin")){
+           //       ModelAndView view=new ModelAndView("redirect:Customer/Searchform.spring");
+                  modelAndView.setViewName("redirect:/admin/orders");
+              }
+          
         } catch (Exception e) {
             System.out.println("An error ocured in CustomersDAOImpl.getUser " + e.getMessage() + e.getCause());
             modelAndView.addObject("message", message);

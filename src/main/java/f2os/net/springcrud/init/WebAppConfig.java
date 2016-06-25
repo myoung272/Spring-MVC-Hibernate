@@ -78,7 +78,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvc
 	private Properties hibProperties() {
 		Properties properties = new Properties();
 		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
-		properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
+		//properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
+                properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
+        properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
 		return properties;	
 	}
 	
@@ -97,7 +99,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvc
 		resolver.setViewClass(JstlView.class);
 		return resolver;
 	}
-       @Bean(name = "multipartResolver")
+       @Bean(name = "multipartResolver") //MY added
     public StandardServletMultipartResolver resolver() {
         return new StandardServletMultipartResolver();
     }

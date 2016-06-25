@@ -20,5 +20,6 @@ public class RegistrationValidator implements Validator {
         Customers regBean = (Customers)command;
         if(!regBean.getPassword().equals(regBean.getRePassword()))
             errors.rejectValue("rePassword","password.notmatch");
+           
         }
 }

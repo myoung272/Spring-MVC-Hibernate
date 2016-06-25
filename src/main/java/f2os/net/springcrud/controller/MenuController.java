@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import f2os.net.springcrud.model.Menu;
+import f2os.net.springcrud.model.OrderHours;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
+import javax.validation.Valid;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,4 +41,15 @@ public class MenuController {
         modelAndView.addObject("cacheMenu", menuItems);
         return modelAndView;
     }
-}
+    
+      @RequestMapping(value = "/allMenuItems", method = RequestMethod.GET)
+    public ModelAndView allMenuItems() {
+        List<Menu> menu = (List<Menu>) servletContext.getAttribute("menu");
+        ModelAndView modelAndView = new ModelAndView("addMenuItem");
+         modelAndView.addObject("menuList", menu);
+         return modelAndView;
+    }
+    
+        
+    }
+

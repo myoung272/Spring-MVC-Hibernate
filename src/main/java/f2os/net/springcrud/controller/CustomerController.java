@@ -22,21 +22,12 @@ public class CustomerController {
     
     @RequestMapping(value="/list")
 	public ModelAndView listOfCustomers() {
-		ModelAndView modelAndView = new ModelAndView("customers");
+		ModelAndView modelAndView = new ModelAndView("addMenuItem");
 		
 		List<Customers> custs = customersService.getCustomers();
 		modelAndView.addObject("custs", custs);
 		
 		return modelAndView;
 	}
-        
- /*     @RequestMapping(method = RequestMethod.GET, value = "/list")
-        public String LogoHeader(Model model) {
-       System.out.println("In CustomerController ");
-        return "LogoHeader";
-}
-        */
-       
-     
-    
+ 
 }

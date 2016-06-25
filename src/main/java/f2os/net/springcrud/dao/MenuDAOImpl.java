@@ -40,7 +40,7 @@ public class MenuDAOImpl implements MenuDAO {
         // change this to only get active menu items
 
         // MY added "and m.active = 0" 2/24/2015
-        return getCurrentSession().createSQLQuery("SELECT * from menu m where m.active = 0")
+        return getCurrentSession().createSQLQuery("SELECT * from menu m where m.active = 0  ORDER BY m.CATEGORY asc")
                 .addEntity(Menu.class)
                 .list();
 
@@ -57,8 +57,18 @@ public class MenuDAOImpl implements MenuDAO {
         getCurrentSession().save(item);
     }
     
+    public void editMenuItem(Menu item) {
+        getCurrentSession().update(item);
+    }
+    
+    public void removeMenuItem(int id){
+        getCurrentSession().createSQLQuery("UPDATE menu SET active = 1 where product_id = :id").setParameter("id",id).executeUpdate();
+    }
+    
     public void setAllMenuItemsInactive() {
         getCurrentSession().createSQLQuery("UPDATE MENU SET active = 1 WHERE active = 0").executeUpdate(); 
     }
+    
+    
 
 }

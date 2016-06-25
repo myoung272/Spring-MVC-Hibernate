@@ -1,6 +1,54 @@
 @charset "utf-8";
 /* CSS Document */
 
+/* BOOTSTRAP CUSTOM */
+   /* Remove the navbar's default margin-bottom and rounded borders */ 
+            .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+            }
+                .navbar-custom {
+   background-color:#66ccff;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+
+            /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+            .row.content {height: 450px}
+
+            /* Set gray background color and 100% height */
+            .sidenav {
+                padding-top: 20px;
+                background-color: #f1f1f1;
+                height: 100%;
+            }
+
+            /* Set black background color, white text and some padding */
+            footer {
+                background-color: #555;
+                color: white;
+                padding: 15px;
+            }
+
+            /* On small screens, set height to 'auto' for sidenav and grid */
+            @media screen and (max-width: 767px) {
+                .sidenav {
+                    height: auto;
+                    padding: 15px;
+                }
+                .row.content {height:auto;} 
+            }
 
 
 
@@ -15,7 +63,7 @@ h1, h2, h5, h6, p {
     padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
 }
 
-body {
+ body {
     background: #FFF;
     margin: 0;
     padding: 0;
@@ -23,8 +71,9 @@ body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 1.4;
-/*    text-align:center; */
+
 }
+
 
 h4 {
     margin: 0 0 10px 0;
@@ -177,7 +226,7 @@ table.center {
 .catItems{
     margin: auto;
     width:100%;
-    font-size:12px;
+    font-size:11px;
 }
 
 
@@ -265,60 +314,11 @@ only when the mouse was over the link, now the link color changes when the mouse
 }
 
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
-.content ul, .content ol { 
-    padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+/* .content ul, .content ol { 
+    padding: 0 15px 15px 40px; 
 }
+*/
 
-/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
-ul.nav {
-    list-style: none; /* this removes the list marker */
-    border-top: 1px solid #666; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
-    margin-bottom: 15px; /* this creates the space between the navigation on the content below */
-}
-ul.nav li {
-    border-bottom: 1px solid #666; /* this creates the button separation */
-}
-ul.nav a, ul.nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
-    padding: 5px 5px 5px 15px;
-    display: block; /* this gives the anchor block properties so it fills out the whole LI that contains it so that the entire area reacts to a mouse click. */
-    width: 160px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
-    text-decoration: none;
-    background: #C6D580;
-}
-ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-    background: #ADB96E;
-    color: #FFF;
-}
-
-/* ~~ The footer styles ~~ */
-.footer {
-    padding: 10px 0;
-    background:#F7F7F7;
-    position: relative;/* this gives IE6 hasLayout to properly clear */
-    clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
-}
-
-/* ~~ Miscellaneous float/clear classes ~~ */
-.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
-    float: right;
-    margin-left: 8px;
-}
-.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
-    float: left;
-    margin-right: 8px;
-}
-.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the .container) if the .footer is removed or taken out of the .container */
-    clear:both;
-    height:0;
-    font-size: 1px;
-    line-height: 0px;
-}
-
-ul, li {
-    margin: 10;
-    padding: 10;
-    /* list-style: none; */
-}
 
 input.order {  
     /* padding: 5px;  */
