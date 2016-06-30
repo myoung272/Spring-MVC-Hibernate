@@ -9,16 +9,26 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-    <!--     <link href="<c:url value="/resources/css/fos.css" />" rel="stylesheet" /> -->
+        
+      
+        
+      <!--  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/dataTables.responsive.css"> -->
+        
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"> 
+    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> -->
         <link href="<c:url value="/resources/css/superMariof2os.css" />" rel="stylesheet"/>
+         <link href="<c:url value="/resources/css/responsive.dataTables.css" />" rel="stylesheet"/>
+       <link href="<c:url value="/resources/css/responsive.bootstrap.css" />" rel="stylesheet"/> 
         
         <script src=" https://code.jquery.com/jquery-1.12.3.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js"></script>
+        
+       
        
 
-        <title>Add Item | Super Mario Pizza</title>
+        <title>addMenuItem.jsp</title>
         <style>
             /* BOOTSTRAP CUSTOM */
             /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -85,7 +95,7 @@
                 text-align: center;
                 width: 30%;
                 align-content: center;
-                 table-layout: fixed;
+            /*     table-layout: fixed; */
             }
           
           
@@ -118,13 +128,13 @@
         <script>
   $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    $('#example tfoot th').each( function () {
+    $('#tbMenuItems tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
     } );
  
     // DataTable
-    var table = $('#example').DataTable();
+    var table = $('#tbMenuItems').DataTable();
  
     // Apply the search
     table.columns().every( function () {
@@ -145,15 +155,12 @@
         </script>
     </head>
     <body>
-          
-        <div class="row">
+             <div class="container-fluid">
+    <!--    <div class="row"> -->
         <%@ include file="/WEB-INF/pages/bootstrapHeader.jspf" %>
-        </div>
-      <div class="container">
-            <%--     <div class="row">
-                     <%@ include file="/WEB-INF/pages/header2.jspf" %> 
-                 </div>
-            --%>
+    <!--    </div> -->
+   
+          
               <c:if test="${!empty fileBucket }">
 <div class="row  catItems ">
                 <form:form method="POST" action="${pageContext.request.contextPath}/addMenuItem/uploadEx.html" modelAttribute="fileBucket" enctype="multipart/form-data" class="form-horizontal">
@@ -202,13 +209,15 @@
              </c:if>
                 <%-- class="row table-responsive catItems container cell-border stripe" --%>
                  <c:if test="${!empty menuList}">
-            <div class="row container" >
+            <div class="table-responsive" >
+             <!--   <div class="col-sm-12"> -->
                
-                   
-                       <table id="example" class="catItems stripe display compact" cellspacing="0" width="100%" >
+                   <!--   table table-striped table-bordered  stripe display compact -->
+                   <!--  class="table catItems  stripe display compact"  -->
+                       <table id="tbMenuItems" class="table catItems  stripe display compact"  cellspacing="0" width="100%" >
                             <thead>
                                 <tr bgcolor ="#ecf2f9" >
-                                    <!-- <th class="header">Product ID</td> -->
+                                   
                                      <th>Prod ID</th>
                                     <th>Category</th>
                                     <th>Item</th>
@@ -279,14 +288,15 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+            <!--    </div>  -->
             </div>
               </c:if>
                 <c:if test="${!empty  custs}"> 
               
-     <div class="catItems container  table-responsive">
+     <div class="catItems  table-responsive">
                
                    
-                       <table id="example" class="catItems stripe display compact" cellspacing="0" width="100%" >
+                       <table id="tbMenuItems" class="catItems stripe display compact" cellspacing="0" width="100%" >
                             <thead>
                                 <tr bgcolor ="#ecf2f9" >
                                     <!-- <th class="header">Product ID</td> -->

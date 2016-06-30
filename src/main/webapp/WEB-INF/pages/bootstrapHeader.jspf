@@ -1,6 +1,6 @@
-<div class="row">
+ <div class="row"> 
     <nav class="navbar-custom navbar-inverse ">
-        <div class="container-fluid">
+     <!--   <div class="container-fluid"> -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -56,6 +56,6 @@
                     <li><a tabindex="-1" href="#">Separated link</a></li>
                 </ul>
             </div>
-        </div>
+   <!--     </div> -->
     </nav>
 </div> 

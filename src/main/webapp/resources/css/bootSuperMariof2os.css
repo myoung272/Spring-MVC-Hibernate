@@ -1,0 +1,338 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* BOOTSTRAP CUSTOM */
+   /* Remove the navbar's default margin-bottom and rounded borders */ 
+            .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+            }
+                .navbar-custom {
+   background-color:#66ccff;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+
+            /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+            .row.content {height: 450px}
+
+            /* Set gray background color and 100% height */
+            .sidenav {
+                padding-top: 20px;
+                background-color: #f1f1f1;
+                height: 100%;
+            }
+
+            /* Set black background color, white text and some padding */
+            footer {
+                background-color: #555;
+                color: white;
+                padding: 15px;
+            }
+
+            /* On small screens, set height to 'auto' for sidenav and grid */
+            @media screen and (max-width: 767px) {
+                .sidenav {
+                    height: auto;
+                    padding: 15px;
+                }
+                .row.content {height:auto;} 
+            }
+
+
+
+/* ~~ Element/tag selectors ~~ */
+dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+    padding: 10;
+    margin: 10;
+}
+h1, h2, h5, h6, p {
+    margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+    padding-right: 15px;
+    padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+}
+
+ body {
+    background: #FFF;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+
+}
+
+
+h4 {
+    margin: 0 0 10px 0;
+    padding: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color:#C6A36F
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color:#C6A36F
+}
+
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+    border: none;
+}
+
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link, a:visited { color: #631c00; text-decoration: none; font-weight: normal; } 
+a:active, a:hover { color: #000000; text-decoration: underline; }
+
+
+/* ~~ This fixed width container surrounds all other divs ~~ */
+.f2os_container {
+    width: 960px;
+    background: #FFFFFF;
+    margin: 0 auto;   /* the auto value on the sides, coupled with the width, centers the layout */
+} 
+
+/* ~~ The header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo. ~~ */
+.nb {
+    display: none;
+    padding: 5px;
+    background-color: #C2F9FF;
+    border: 1px solid #000;
+}
+
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  /*  width:955px ; */
+}
+
+
+
+.header {
+    /*background-image:url(images/marioHeader.jpg);*/
+    width:960px; 
+    height:160px;
+    position:relative;
+    border-bottom:solid 5px #009900;
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+.logo{
+    position:absolute;
+    top:0px;
+    left:10px;
+    width:200px;
+}
+
+.headerText{
+    position:absolute;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    color: #cc3333;
+    left:220px;
+    height:30px;
+    top: 5px;
+}
+
+.peppers{
+    position:absolute;
+    left:300px;
+    top: 50px;
+}
+.headerAddress{
+    position:absolute;
+    top:  20px;
+    right: 0px;
+    width:300px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #cc3333;
+}
+
+.navLinks{
+    position:absolute;
+    bottom: 0px;
+    right:0px;
+    width: 400px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    color: #cc3333;
+}
+
+
+#headerTable{
+    background-image:url(images/marioHeader2.jpg);
+}
+
+
+.sidebar1 {
+    float: left;
+    width: 176px;
+    background: #fff;
+/*    border:1px solid #009900; */
+    /*border-radius:5px;
+-moz-border-radius:5px;*/ /* Firefox 3.6 and earlier */
+    /* padding-bottom: 10px;*/
+}
+.content {
+    padding: 10px 0;
+ /*   width: 570px;  */
+    float: left;
+}
+.catItemsHeader{
+    text-align:center;
+    color:#C6A36F;
+}
+.itemHeader{
+    text-align:center;
+    color:#FFFFFF;
+    background-color:#C6A36F;
+    font-size:12px;
+}
+.rowA{
+    /*	background-color:#F00; */
+    text-align:center;
+    font-size:14px;
+    color: #cc3333;
+}
+.rowB{
+    /*	background-color:#009900; */
+    text-align:center;
+    font-size:14px;
+    font-weight:500;
+    color: #cc3333;
+}
+
+
+
+.catItems{
+    margin: auto;
+    width:100%;
+    font-size:11px;
+}
+
+
+
+table#orderItems{
+    margin: auto;
+    width:100%;
+}
+
+table.confirm {
+    font-size:12px;
+    margin: auto;
+    width:100%;
+}
+
+table.register{
+    font-size:12px;
+    margin: auto;
+    width:100%;
+}
+
+table.confirmation{
+    font-size:12px;
+}
+
+.normal {
+    font-size:12px;
+}
+
+.normalBeige {
+    font-size:12px;
+    color:#C6A36F;
+}
+.addressTextColor{
+    color: #cc3333;
+}
+.sidebar2 {
+    float: right;
+    width: 210px;
+    background: #fff;
+    border:1px solid #009900;
+    padding: 10px 0;
+    font-size:12px;
+
+}
+
+table.orderTimes {
+    color:#C6A36F;
+}
+
+table#categories{
+    width: 100%;
+    border-collapse:collapse;
+}
+
+table#categories td, th { 
+    border: 1px #009900 solid;
+    padding-left: 5px; 
+}
+
+#catHeader{
+    background-color:#F00;
+    color:#FFFFFF;
+    text-align:center;
+}
+
+.catRow {
+    background-color: #FFF; border: 1px #000000 solid;
+} 
+
+.catRow:hover a{  /* Originaly I used .catRow a:hover which would change the link color 
+only when the mouse was over the link, now the link color changes when the mouse is over any part of the row */
+    color:#FFFFFF;
+    text-decoration:none;
+    display: block; /* added 10/1/2015 */
+}
+
+.sidebar3 {
+    clear:both;
+    float: right;
+    width: 180px;
+    background: #EADCAE;
+    padding: 10px 0;
+
+}
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+/* .content ul, .content ol { 
+    padding: 0 15px 15px 40px; 
+}
+*/
+
+
+input.order {  
+    /* padding: 5px;  */
+    font-size: 12px;  
+    text-shadow: 0px 1px 0px #fff;  
+    outline: none;  
+    background: -webkit-gradient(linear, left top, left bottombottom, from(#C6A36F), to(#ffffff));  
+    background: -moz-linear-gradient(top,  #C6A36F,  #ffffff);  
+    /* -webkit-border-radius: 3px;  
+-moz-border-radius: 3px;  
+border-radius: 3px;  */
+}  
+
+/*.itemHeaderUL ul, li {
+      list-style-type: none;
+           display:inline;
+        }*/

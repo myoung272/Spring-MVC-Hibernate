@@ -30,6 +30,13 @@ public class LinkController {
     public ModelAndView showCatsIndex() {
         return catsCache();
     }
+    
+      @RequestMapping(value = "/bootHome" )
+      public ModelAndView showBootHome() {
+        ModelAndView modelAndView = new ModelAndView("bootHome");
+        return modelAndView;
+    }
+    
 
     public ModelAndView catsCache() {
         ModelAndView modelAndView = new ModelAndView("home");

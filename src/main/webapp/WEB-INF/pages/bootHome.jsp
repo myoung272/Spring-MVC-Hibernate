@@ -11,13 +11,14 @@
              pageEncoding="ISO-8859-1"%>
 
     <head>
+         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <title>Super Mario Pizza</title>
           <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
-        <link href="<c:url value="/resources/css/fos.css" />" rel="stylesheet" />
-        <link href="<c:url value="/resources/css/superMariof2os.css" />" rel="stylesheet"/> 
+      <%--  <link href="<c:url value="/resources/css/fos.css" />" rel="stylesheet" /> --%>
+       <link href="<c:url value="/resources/css/bootSuperMariof2os.css" />" rel="stylesheet"/> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
         
         <script>
             counter = 0;
@@ -99,12 +100,13 @@
     <body>
         <h2 align="center">Super Mario Spring MVC Hibernate 4.0</h2>
         <h5 align="center">  <a href="javascript:window.alert('You are in ' + (document.compatMode==='CSS1Compat'?'Standards':'Quirks') + ' mode.');">What mode am I?</a> </h5>
-        <div class="f2os_container">
-            <%@ include file="/WEB-INF/pages/header2.jspf" %>
+        <div class="container">
+          
 
             <!-- list of categories on left side of page, always displayed set as a session attribute. -->
+            <div class="row">
 
-            <div class="sidebar1">
+            <div class="sidebar1 col-xs-3">
                 <table id="categories" >
                     <tr><td id="catHeader">Categories:</td></tr>
                     <!-- This link will generate the menu items associated with the category clicked on -->
@@ -116,7 +118,7 @@
             </div>
             <!-- end .sidebar1 CATEGORIES -->
 
-            <div id="mainContent" class="content">
+            <div id="mainContent" class="col-xs-6">
                 <p><h3 style="color: red; text-align: center">${message}</h3></p>
                 
                 <!-- CUSTOMERS ORDERS -->
@@ -151,15 +153,15 @@
                 <div id="ajaxMenu"> 
                     <c:if test="${empty cacheMenu && empty orderLineItems && empty placedOrder && param.reg ne 'reg' }">
                         <p ><h4 style="text-align: center; " >Pick from a category on the left to start your order.</h4>
-                        <img style="margin:0px auto;display:block"  src="<c:url value="/resources/images/leftHand.jpg" />" />
+                    <%--    <img style="margin:0px auto;display:block"  src="<c:url value="/resources/images/leftHand.jpg" />" /> --%>
                         </p>
                     </c:if>
                     <!-- will show the menu items associated to a category, will not render if cacheMenu is empty -->
                     <c:if test="${!empty cacheMenu}"> 
-                        <div id="menuItemsDiv">
+                        <div id="menuItemsDiv" class="table-responsive">
 
                             <%--    <form:form id="" name="orderItemForm" method="get" commandName="order" action="${pageContext.request.contextPath}/order/orderItems/${cm.productId}.html"> --%>
-                            <table id="menuItems" class="catItems myOrderInfo" rules="rows">
+                            <table id="menuItems" class=" table catItems" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th id="catItemsHeader" colspan="7" align="center">Category: ${cacheMenu[0].category}</th>
@@ -222,7 +224,7 @@
                     <c:if test="${!empty orderLineItems }">
                         <c:if test="${param.confirm != 'yes'}">
                             
-                                <table id="tblRemItem" class="catItems myOrderInfo"  rules="rows"  >
+                                <table id="tblRemItem" class="catItems"  >
                                     <tr><td class="normalBeige" colspan="9" align="center" > < Select another category to add to your order.</td></tr>
                                     <tr><td class="normalBeige" colspan="9" align="center"><b>Your Order Contains:</b></td></tr>
                                     <tr><td colspan="8" align="center"><font color="#FF0000">${errorMessage}</font></td></tr>
@@ -435,7 +437,7 @@
                 </c:if>
             </div>  <!-- end content -->
             
-            <div class="sidebar2">
+            <div class="col-xs-3 sidebar2">
                 <table >
                     <c:if test="${! empty uBean}">
                         <tr>
@@ -474,11 +476,12 @@
                     <a href="${pageContext.request.contextPath}/team/add.html">Add new team</a><br/>
                     <a href="${pageContext.request.contextPath}/team/list.html">Team list</a><br/>
                     <a href="${pageContext.request.contextPath}/customers/list.html">Customers list</a><br/>
-                    <a href="${pageContext.request.contextPath}/bootHome.html">bootHome page</a><br />
+                    <a href="${pageContext.request.contextPath}/index.html">Home page</a><br />
                     <a href="${pageContext.request.contextPath}/user.html?login=login">Login on home page</a>
                 </p>
             </div>
             <!-- end .sidebar2 -->
+            </div>
 
         </div> <!-- end container div -->
 
