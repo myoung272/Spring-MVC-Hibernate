@@ -15,6 +15,8 @@ import f2os.net.springcrud.model.Roles;
 import f2os.net.springcrud.service.CustomersService;
 import f2os.net.springcrud.service.RolesService;
 import f2os.net.springcrud.util.RegistrationValidator;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.validation.Validator;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +29,9 @@ public class RegistrationController {
 
     @Autowired
     private RolesService rolesService;
+    
+    @Autowired // without @Autowired anotation servletContext was null
+    private ServletContext servletContext;
 
     //  RegistrationValidator validator = null;
     private RegistrationValidator validator;
@@ -41,15 +46,19 @@ public class RegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showForm(ModelMap model) {
-        Customers userRegis = new Customers();
+    public String showForm(ModelMap model, HttpSession session) {
+       Customers userRegis = (Customers) session.getAttribute("uBean");
+       
+       if(userRegis == null){
+           userRegis = new Customers();
+    }
         model.addAttribute("Registration", userRegis);
-        return "home";
+        return "bootHome";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView processForm(@ModelAttribute(value = "Registration") @Valid Customers userRegis, BindingResult result) {
-        ModelAndView mav = new ModelAndView("home");
+        ModelAndView mav = new ModelAndView("bootHome");
         if (result.hasErrors()) {
             return mav;
         }

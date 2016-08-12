@@ -4,6 +4,7 @@
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@ page trimDirectiveWhitespaces="true" %>
+    
 
     <?xml version="1.0" encoding="ISO-8859-1" ?>
 
@@ -15,10 +16,68 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <title>Super Mario Pizza</title>
           <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+           <link href="<c:url value="/resources/css/responsive.bootstrap.css" />" rel="stylesheet"/> 
       <%--  <link href="<c:url value="/resources/css/fos.css" />" rel="stylesheet" /> --%>
-       <link href="<c:url value="/resources/css/bootSuperMariof2os.css" />" rel="stylesheet"/> 
+      <link href="<c:url value="/resources/css/bootSuperMariof2os.css" />" rel="stylesheet"/> 
+      
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+       
+          <style>
+            /* BOOTSTRAP CUSTOM */
+   /* Remove the navbar's default margin-bottom and rounded borders */ 
+            .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+            }
+                .navbar-custom {
+   background-color:#66ccff;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+
+            /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+            .row.content {height: 450px}
+
+            /* Set gray background color and 100% height */
+            .sidenav {
+                padding-top: 20px;
+                background-color: #f1f1f1;
+                height: 100%;
+            }
+
+            /* Set black background color, white text and some padding */
+            footer {
+                background-color: #555;
+                color: white;
+                padding: 15px;
+            }
+
+            /* On small screens, set height to 'auto' for sidenav and grid */
+            @media screen and (max-width: 767px) {
+                .sidenav {
+                    height: auto;
+                    padding: 15px;
+                }
+                .row.content {height:auto;} 
+            }
+            
+            hr {
+                 border-width: 2px;
+            }
+
+        </style>
         
         <script>
             counter = 0;
@@ -52,7 +111,7 @@
                 form.submit();
             }
         </script>
-      <script>
+     <script>
             $(document).ready(function () {
                 function getCat(event) {
                     event.preventDefault();
@@ -73,8 +132,9 @@
 
             }); // end doc ready
         </script>
+     
        
-        <script type="text/javascript">
+        <script >
             $(document).ready(function () {
                 $("#mainContent").on('click', 'form[name="orderItemForm"]', function () {
                     event.preventDefault();
@@ -94,31 +154,38 @@
                 });
             }); // end doc ready	
         </script>
+   
+   
+     
 
     </head>
 
     <body>
         <h2 align="center">Super Mario Spring MVC Hibernate 4.0</h2>
-        <h5 align="center">  <a href="javascript:window.alert('You are in ' + (document.compatMode==='CSS1Compat'?'Standards':'Quirks') + ' mode.');">What mode am I?</a> </h5>
-        <div class="container">
+   
+      
+        <div class="container-fluid">
+               <%@ include file="/WEB-INF/pages/custBootstrapHeader.jspf" %>
           
 
             <!-- list of categories on left side of page, always displayed set as a session attribute. -->
             <div class="row">
 
-            <div class="sidebar1 col-xs-3">
+           <div class="sidebar1 col-xs-3 col-md-3"> 
                 <table id="categories" >
                     <tr><td id="catHeader">Categories:</td></tr>
                     <!-- This link will generate the menu items associated with the category clicked on -->
                     <c:forEach var="cat" items="${catCache}" varStatus="line">
-                        <tr><td id="selCat" class="catRow" onMouseOver="style.backgroundColor = '#009900';"onMouseOut="style.backgroundColor = '#FFF'">
+                        <tr><td id="selCat" class="catRow" onMouseOver="style.backgroundColor = '#66ccff';"onMouseOut="style.backgroundColor = '#FFF'">
                                 <a href="${pageContext.request.contextPath}/menu/menuCat/${cat.category}.html">${cat.category}</a></td></tr>
                             </c:forEach>
                 </table>
             </div>
+       
+      
             <!-- end .sidebar1 CATEGORIES -->
 
-            <div id="mainContent" class="col-xs-6">
+            <div id="mainContent" class="col-xs-6 col-md-6">
                 <p><h3 style="color: red; text-align: center">${message}</h3></p>
                 
                 <!-- CUSTOMERS ORDERS -->
@@ -130,13 +197,14 @@
              
                     <!-- LOGIN FORM -->
                 <c:if test="${param.login eq 'login'}">
-                    <div>
+                    <div class="table-responsive">
                         <form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/user.html">
-                            <table class="normal">
+                            <table class="tablel">
                                 <tbody>
-                                    <tr><td>&nbsp; Email:</td><td> <form:input path="email"/></td>
-                                        <td>Password:</td> <td> <form:password path="password"/></td>
-                                        <td><input type="submit" value="Submit"/></td>
+                                    <tr>
+                                        <td>&nbsp; Email:</td><td> <form:input path="email"/></td>
+                                        <td>Password:</td> <td> <form:password path="password"/></td>&nbsp;&nbsp;
+                                        <td><input type="submit" value="Submit" class="btn btn-primary btn-sm"/></td>
                                         <td></td>
                                     </tr>
                                 </tbody>
@@ -150,42 +218,37 @@
                 </c:if>
 
                 <!-- will show instructions when a category has not been selected -->
-                <div id="ajaxMenu"> 
+                <!--   <div id="ajaxMenu"> -->
                     <c:if test="${empty cacheMenu && empty orderLineItems && empty placedOrder && param.reg ne 'reg' }">
                         <p ><h4 style="text-align: center; " >Pick from a category on the left to start your order.</h4>
-                    <%--    <img style="margin:0px auto;display:block"  src="<c:url value="/resources/images/leftHand.jpg" />" /> --%>
+                       <img style="margin:0px auto;display:block"  src="<c:url value="/resources/images/leftHand.jpg" />" /> 
                         </p>
                     </c:if>
                     <!-- will show the menu items associated to a category, will not render if cacheMenu is empty -->
+                 
                     <c:if test="${!empty cacheMenu}"> 
-                        <div id="menuItemsDiv" class="table-responsive">
+                           <div id="menuItemsDiv" class="table-responsive">
+                              <table id="menuItems" class="table" cellspacing="0" width="100%">
 
                             <%--    <form:form id="" name="orderItemForm" method="get" commandName="order" action="${pageContext.request.contextPath}/order/orderItems/${cm.productId}.html"> --%>
-                            <table id="menuItems" class=" table catItems" cellspacing="0" width="100%">
+                          
                                 <thead>
                                     <tr>
-                                        <th id="catItemsHeader" colspan="7" align="center">Category: ${cacheMenu[0].category}</th>
+                                        <th id="catItemsHeader" colspan="6" align="center">Category: ${cacheMenu[0].category}</th>
                                     </tr>
                                     <tr>
-                                        <th class="itemHeader">Category</th>
-                                        <th class="itemHeader">Item</th>
-                                        <th class="itemHeader">Size</th>
-                                        <th class="itemHeader">Description</th>
-                                        <th class="itemHeader">Price</th>
-                                        <th class="itemHeader">Add to Order</th>
+                                        <th >Category</th>
+                                        <th >Item</th>
+                                        <th >Size</th>
+                                        <th >Description</th>
+                                        <th >Price</th>
+                                        <th >Add to Order</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="cm" items="${cacheMenu}" varStatus="line">
-                                        <c:choose>
-                                            <c:when test="${line.count % 2 == 0}">
-                                                <tr class="rowA">
-                                                </c:when>
-                                                <c:otherwise>
-                                                <tr class="rowB">
-                                                </c:otherwise>
-                                            </c:choose>
-
+                                       
+                                        <tr>
                                             <td> ${cm.category}
                                                 <input  type="hidden" name="category" value="${cm.category}" />
                                             </td>
@@ -205,48 +268,50 @@
                                                 <input type="hidden" name="price" value="${cm.price}" />
                                             </td>
                                             <td>
-                                                <form:form id="" name="orderItemForm" method="get" commandName="order" action="${pageContext.request.contextPath}/order/orderItems/${cm.productId}.html">
-                                                    <input class="order" type="text" size="2" name="pQuant" value="1" />
-                                                    <input class="order"   type="button"  value="Add to Order" class="btn btn-primary btn-sm" /> 
+                                                <%-- commandName="order" --%>
+                                                <form:form id="" name="orderItemForm" method="get"  action="${pageContext.request.contextPath}/order/orderItems/${cm.productId}.html">
+                                                    <input  type="text" size="2" name="pQuant" value="1"  />
+                                                    <input   type="button"  value="Add to Order" class="btn btn-primary btn-sm" /> 
                                                 </form:form>
                                             </td> 
                                         </tr> 
                                     </c:forEach>
-                                    <tr><td>&nbsp;</td></tr>
+                                        <tr><td colspan="6">&nbsp;</td></tr>
                                 </tbody>
                             </table>
-                        </div>      
+                                    </div>
                     </c:if>
-                </div> 
+                 
+                        
+                                   
+                    
+              <!--  </div> -->
                 <!--End ajax menu -->
                 <!-- MENU SELECTED ITEMS -->
-                <div id="menuSelItems">
+                <%--    <div id="menuSelItems" class="table-responsive"> --%>
+                   <div id="menuSelItems">
                     <c:if test="${!empty orderLineItems }">
+                        
                         <c:if test="${param.confirm != 'yes'}">
-                            
-                                <table id="tblRemItem" class="catItems"  >
+                         
+                                <div class="table-responsive">
+                                <table id="tblRemItem" class="table"  >
                                     <tr><td class="normalBeige" colspan="9" align="center" > < Select another category to add to your order.</td></tr>
                                     <tr><td class="normalBeige" colspan="9" align="center"><b>Your Order Contains:</b></td></tr>
                                     <tr><td colspan="8" align="center"><font color="#FF0000">${errorMessage}</font></td></tr>
-                                    <tr bgcolor="#967853">
-                                        <td class="itemHeader">Category</td>
-                                        <td class="itemHeader">Item</td>
-                                        <td class="itemHeader">Size</td>
-                                        <!--  <td class="itemHeader">Quantity</td> -->
-                                        <td class="itemHeader">Update</td>
-                                        <td class="itemHeader">Price</td>
-                                        <td class="itemHeader">Amount</td>
-                                        <td class="itemHeader">Remove</td>
+                                
+                                    <tr>
+                                        <th >Category</th>
+                                        <th >Item</th>
+                                        <th >Size</th>
+                                        <th>Update</th>
+                                        <th >Price</th>
+                                        <th >Amount</th>
+                                        <th >Remove</th>
                                     </tr>
+                          
                                     <c:forEach var="o" items="${orderLineItems}" varStatus="line">
-                                        <c:choose>
-                                            <c:when test="${line.count % 2 == 0}">
-                                                <tr class="rowB">
-                                                </c:when>
-                                                <c:otherwise>
-                                                <tr class="rowA">
-                                                </c:otherwise>
-                                            </c:choose>
+                                        <tr>
                                             <td>${o.category}</td>
                                             <td>${o.item}</td>
                                             <td>${o.size}</td>
@@ -255,18 +320,24 @@
                                                 <form action="${pageContext.request.contextPath}/order/update/${o.productId}" name="updateItem" method="post">
                                                     <input class="order" type="text" size="2" name="updateOrderQuant"  value="${o.quantity}" />
                                                     <input type="hidden" name="updateIndex" value="${line.count}" />
-                                                    <input class="order" type="submit" value="Update" class="btn btn-primary btn-sm" />
+                                                    <input type="submit" value="Update" class="btn btn-primary btn-sm" />
                                                 </form>
                                             </td>
                                             <td>${o.price}</td>
                                             <td>${o.price * o.quantity}</td>
                                             <!-- REMOVE ITEM LINK -->
                                             <td ><a name="removeItem" href="${pageContext.request.contextPath}/order/remove/${o.productId}.html">Remove</a></td>
+                                        </tr>
                                         </c:forEach>
                                     <tr><td>&nbsp;</td></tr>
                                 </table>
+                                </div>
                             </c:if>
-                            <%-- c:if  --%>
+                           <c:if test="${empty uBean && !empty orderLineItems}">
+                        <p>  <a href="${pageContext.request.contextPath}/user.html?login=login">
+                                <font color="#FF0000">You must log in to place your order.</font></a></p>
+                              </c:if>
+                           
                             <c:if test="${!empty uBean && !empty orderLineItems && empty orderTotals}">
                                 <table>
                                     <tr>
@@ -278,44 +349,38 @@
                                                 <input type="radio" name="pickOrDel" id="del" value="Delivery"/>
                                                 <input type="hidden" name="confirm" value="yes"/>
                                                 <input type="hidden" name="backButton" value="0"/>
-                                                <input type="button" value="Continue" onclick="validatePickOrDel(this.form)"/>
+                                                <input type="button" value="Continue" class="btn btn-primary btn-sm" onclick="validatePickOrDel(this.form)"/>
                                             </form>
                                         </td>
                                     </tr>
-                                </c:if>
-                                <c:if test="${empty uBean && !empty orderLineItems}">
-                                    <tr><td colspan="9"><a href="${pageContext.request.contextPath}/user.html?login=login">
-                                                <font color="#FF0000">You must log in to place your order.</font></a></td></tr>
-                              </c:if>
                             </table>
+                           </c:if>
+                    
                         </c:if>
-                </div>  
+                                   </div> <!-- END menuSelItems -->
+          
                 <!-- END MENU SELECTED ITEMS -->
                 <!-- Show Order for confirmation after user clicks "Continue" button -->
-                     <div>
+                       
                 <c:if test="${param.confirm eq 'yes'}">
-                    <table class="catItems" rules="rows">
+               <!--     <div> -->
+                   
                         <c:if test="${!empty orderLineItems}">
+                            <div class="table-responsive">
+                             <table class="table" rules="rows">
                             <tr>
                                 <td colspan="6" align="center"><b> Your Order Contains:</b></td>
                             </tr>
-                            <tr bgcolor="#E2D1B8">
-                                <td class="itemHeader">Category</td>
-                                <td class="itemHeader">Item</td>
-                                <td class="itemHeader">Size</td>
-                                <td class="itemHeader">Quantity</td>
-                                <td class="itemHeader">Price</td>
-                                <td class="itemHeader">Amount</td>
+                            <tr >
+                                <td >Category</td>
+                                <td >Item</td>
+                                <td >Size</td>
+                                <td >Quantity</td>
+                                <td >Price</td>
+                                <td >Amount</td>
                             </tr>
                             <c:forEach var="o" items="${orderLineItems}" varStatus="line">
-                                <c:choose>
-                                    <c:when test="${line.count % 2 == 0}">
-                                        <tr class="rowB">
-                                        </c:when>
-                                        <c:otherwise>
-                                        <tr class="rowA">
-                                        </c:otherwise>
-                                    </c:choose>
+                                <tr>
                                     <td>${o.category}</td>
                                     <td>${o.item}</td>
                                     <td>${o.size}</td>
@@ -324,8 +389,10 @@
                                     <td><fmt:formatNumber value="${o.quantity * o.price}" type="currency"/></td>
                                 </tr>
                             </c:forEach>
-                        </table>
-                    </c:if>
+                                 </c:if>
+                             </table>
+                        
+                   
 
                     <form:form method="post" action="${pageContext.request.contextPath}/order/saveOrder/${uBean.custId}.html">
                         <!-- SUBMIT ORDER -->
@@ -345,7 +412,7 @@
                                 </c:if>
                                 <tr>
                                  <c:if test="${param.pickOrDel eq 'Delivery' && orderTotals.total  >= 11 || param.pickOrDel eq 'PickUp' }">
-                                 <td> <input type="submit" value="Place Order"/> </td>
+                                 <td> <input type="submit" value="Place Order" class="btn btn-primary btn-sm"/> </td>
                                 </c:if>
                                     <td> <input type="hidden" name="orderTotal" value="${orderTotals.total}"/> </td>
                                     <td> <input type="hidden" name="userEmail" value="${uBean.email}"/>
@@ -365,12 +432,13 @@
                                 </tr>
                                 </c:if>
                         </table>
-                    </form:form>                
+                    </form:form>  
+                          </div> 
                 </c:if>
-                     </div>        
+                           
                 <c:if test="${!empty placedOrder}">
-
-                    <table class="catItems  myOrderInfo ">
+                       <div class="table-responsive">
+                    <table class="table ">
                         <tr>
                             <td colspan="6"> Thank You  ${uBean.fname}&nbsp; ${uBean.lname} ( Customer# ${uBean.custId} )</td>
                         </tr>
@@ -380,23 +448,16 @@
                         <tr>
                             <td colspan="6" align="center"><b> Your Order Contains:</b></td>
                         </tr>
-                        <tr  class="normalBeige">
-                            <td class="itemHeader">Category</td>
-                            <td class="itemHeader">Item</td>
-                            <td class="itemHeader">Size</td>
-                            <td class="itemHeader">Quantity</td>
-                            <td class="itemHeader">Price</td>
-                            <td class="itemHeader">Amount</td>
+                        <tr  >
+                            <td >Category</td>
+                            <td >Item</td>
+                            <td >Size</td>
+                            <td >Quantity</td>
+                            <td >Price</td>
+                            <td >Amount</td>
                         </tr>
                         <c:forEach var="o" items="${placedOrder}" varStatus="line">
-                            <c:choose>
-                                <c:when test="${line.count % 2 == 0}">
-                                    <tr bgcolor="#CCCCCC">
-                                    </c:when>
-                                    <c:otherwise>
-                                    <tr bgcolor="#F1F1F1">
-                                    </c:otherwise>
-                                </c:choose>
+                            <tr>
                                 <td>${o.category}</td>
                                 <td>${o.item}</td>
                                 <td>${o.size}</td>
@@ -434,10 +495,12 @@
                             </td>
                         </tr>
                     </table>
+                       </div>         
                 </c:if>
+               
             </div>  <!-- end content -->
             
-            <div class="col-xs-3 sidebar2">
+            <div class="col-xs-3 col-md-3 sidebar2">
                 <table >
                     <c:if test="${! empty uBean}">
                         <tr>
@@ -473,15 +536,10 @@
                 </p>
                 <p style="float:left"
                    ${message} <c:out value="${pageContext.request.contextPath}"/><br/>
-                    <a href="${pageContext.request.contextPath}/team/add.html">Add new team</a><br/>
-                    <a href="${pageContext.request.contextPath}/team/list.html">Team list</a><br/>
-                    <a href="${pageContext.request.contextPath}/customers/list.html">Customers list</a><br/>
-                    <a href="${pageContext.request.contextPath}/index.html">Home page</a><br />
-                    <a href="${pageContext.request.contextPath}/user.html?login=login">Login on home page</a>
                 </p>
             </div>
             <!-- end .sidebar2 -->
-            </div>
+            </div> <!-- END ROW -->
 
         </div> <!-- end container div -->
 

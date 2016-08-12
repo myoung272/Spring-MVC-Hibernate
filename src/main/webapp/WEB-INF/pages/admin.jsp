@@ -74,6 +74,13 @@
         
     </head>
     <body>
+           <c:choose>
+       <c:when test="${empty uBean or !uBean.getRole().getRole().equalsIgnoreCase('admin') }">
+            <h2 align="center">Super Mario Spring MVC Hibernate 4.0</h2>
+            <h3 align=" center"><font style="color: red" >You must be logged in as an admin to view this page.</font>  <a href="${pageContext.request.contextPath}/user.html?login=login">Login</a> </h3>
+           
+       </c:when>
+           <c:otherwise>
         <%@ include file="/WEB-INF/pages/bootstrapHeader.jspf" %>
         
         <div class="container text-center">   
@@ -241,6 +248,7 @@
         
         </div>
 
-
+   </c:otherwise>
+        </c:choose>
     </body>
 </html>

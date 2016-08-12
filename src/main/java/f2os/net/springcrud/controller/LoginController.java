@@ -4,6 +4,7 @@ import f2os.net.springcrud.model.Customers;
 import f2os.net.springcrud.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +34,7 @@ public class LoginController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ModelAndView renderLogin() {
       
-         ModelAndView modelAndView = new ModelAndView("home"); // was login
+         ModelAndView modelAndView = new ModelAndView("bootHome"); // was login
           modelAndView.addObject("user", new Customers());
         System.out.println("get view Name " + modelAndView.getViewName());
         System.out.println("getModel " + modelAndView.getModel());
@@ -47,7 +48,7 @@ public class LoginController {
     
         String message = "Login failed, check email and password";
         System.out.println("email is " + user.getEmail() + " password is " + user.getPassword());
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("bootHome");
         try {
          //   userBean = customersService.getUser(user.getEmail(), user.getPassword());
               user = customersService.getUser(user.getEmail(), user.getPassword());
@@ -63,7 +64,7 @@ public class LoginController {
         }
         if(user == null){ // user not found
             System.out.println("user after login attempt is null");
-            modelAndView.setViewName("home");
+            modelAndView.setViewName("bootHome");
              modelAndView.addObject("user", new Customers());
              modelAndView.addObject("message", message);
             boolean ub =  modelAndView.getModel().containsValue("uBean");
@@ -87,8 +88,17 @@ public class LoginController {
      //   modelAndView.addObject("userBean", userBean);
         //Since we are adding userBean to cache we don't need above line userBean is added cache via class anotation @SessionAttributes("uBean")
         modelAndView.addObject("uBean", user);
+        
 
         return modelAndView;
+    }
+    
+     @RequestMapping(value = "/logOut", method = RequestMethod.GET)
+    public String logOut(@ModelAttribute Customers uBean,  WebRequest request,SessionStatus status) {
+       status.setComplete();
+    request.removeAttribute("uBean", WebRequest.SCOPE_SESSION);
+         ModelAndView modelAndView = new ModelAndView("bootHome"); // was login
+        return "redirect:/bootHome";
     }
 
 }

@@ -4,6 +4,7 @@
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <head>
+        <meta http-equiv="refresh" content="30">
         <title>adminOrders.jsp</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,7 +77,7 @@
                 border-width: 2px;
             }
 
-            th, td {
+     /*       th, td {
                 padding: 5px;
                 text-align: left;
             }
@@ -87,7 +88,10 @@
     text-align: center;
     width: 30%;
     align-content: center;
+     margin: 0 auto;
 }
+
+*/
 
 .itemTD {
     text-align: center;
@@ -102,12 +106,21 @@
 
     </head>
     <body>
+        <div class="container-fluid  ">  
+            <c:choose>
+       <c:when test="${empty uBean or !uBean.getRole().getRole().equalsIgnoreCase('admin') }">
+            <h2 align="center">Super Mario Spring MVC Hibernate 4.0</h2>
+            <h3 align=" center"><font style="color: red" >You must be logged in as an admin to view this page.</font>  <a href="${pageContext.request.contextPath}/user.html?login=login">Login</a> </h3>
+           
+       </c:when>
+           <c:otherwise>
+                  
         <%@ include file="/WEB-INF/pages/bootstrapHeader.jspf" %>
-        <div class="container">  
+     
               <!-- ALL OPEN ORDERS --> 
             <c:if test="${!empty orders}">
-            <div class="row table-responsive">
-                <table>
+                <div class="row table-responsive" style="float: none">
+                <table class="table" align="center">
                     <thead>
                         <tr>
                             <th>Status</th>
@@ -144,18 +157,17 @@
                                  </c:forEach>
                             </tbody>
                 </table>
+                     </div>
             </c:if>
-            </div>
+           
                 <!-- SINGLE ORDER DETAIL --> 
                 <c:if test="${!empty custTodayOrders or !empty orderDetail}">
-                <div class="container row table-responsive">
+              
                       <%@ include file="/WEB-INF/pages/adminOrderDetail.jspf"%>  
-                </div>
+               
                  </c:if>
-                
-                <!-- TURN ON/OFF ORDERING -->
-        
-        
         </div>  <!-- container --> 
+          </c:otherwise>
+        </c:choose>
     </body> 
 </html>

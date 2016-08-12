@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
 <form:form commandName="Registration" name="regForm" id="regForm">
     <table>
@@ -11,9 +12,25 @@
         <tr><td>Zip : </td><td><form:input path="zip"  name="zip" size="5"  required="required" minlength="5" maxlength="5"/></td></tr>
         <tr><td>Email : </td><td><form:input path="email" name="email" type="email" id="email" required="required"  /></td></tr>
         <tr><td>Phone : </td><td><form:input path="phone" type="tel" required="required"/></td></tr>
-        <tr><td>Password : </td><td><form:password path="password" minlength="6" required="required"/></td></tr>
+        <c:if test="${uBean.role.role eq 'admin'}">
+<tr>
+<td>Fax Phone </td> <td><form:input type="text" name="faxPhone" path="faxPhone" size="20"/></td>
+</tr>
+<tr>
+<td>Cell Phone </td> <td><form:input type="text" name="smsPhone" path="smsPhone" size="20"/></td>
+</tr>
+</c:if>
+      
+<c:choose>
+    <c:when test="${empty uBean }">
+          <tr><td>Password : </td><td><form:password path="password" minlength="6" required="required"/></td></tr>
         <tr><td>Retype Password : </td><td><form:password path="rePassword" minlength="6" required="required" /></td></tr>
-        <tr><td colspan="2"><input type="submit" value="Register" /></td></tr>
+        <tr><td colspan="2"><input type="submit" value="Register" class="btn btn-primary btn-sm" /></td></tr>
+        </c:when>
+        <c:otherwise>
+                 <tr><td colspan="2"><input type="submit" value="Edit" class="btn btn-primary btn-sm"/></td></tr> 
+        </c:otherwise>
+</c:choose>
     </table>
 </form:form>
 </div>

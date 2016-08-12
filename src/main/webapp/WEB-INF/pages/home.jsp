@@ -99,7 +99,7 @@
     <body>
         <h2 align="center">Super Mario Spring MVC Hibernate 4.0</h2>
         <h5 align="center">  <a href="javascript:window.alert('You are in ' + (document.compatMode==='CSS1Compat'?'Standards':'Quirks') + ' mode.');">What mode am I?</a> </h5>
-        <div class="f2os_container">
+        <div class="container-fluid">
             <%@ include file="/WEB-INF/pages/header2.jspf" %>
 
             <!-- list of categories on left side of page, always displayed set as a session attribute. -->
@@ -130,12 +130,12 @@
                 <c:if test="${param.login eq 'login'}">
                     <div>
                         <form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/user.html">
-                            <table class="normal">
+                            <table >
                                 <tbody>
                                     <tr><td>&nbsp; Email:</td><td> <form:input path="email"/></td>
                                         <td>Password:</td> <td> <form:password path="password"/></td>
-                                        <td><input type="submit" value="Submit"/></td>
-                                        <td></td>
+                                        <td><input type="submit" value="Edit" class="btn btn-primary btn-sm"/></td>
+                                        
                                     </tr>
                                 </tbody>
                             </table>
@@ -471,11 +471,14 @@
                 </p>
                 <p style="float:left"
                    ${message} <c:out value="${pageContext.request.contextPath}"/><br/>
-                    <a href="${pageContext.request.contextPath}/team/add.html">Add new team</a><br/>
+              <%--      <a href="${pageContext.request.contextPath}/team/add.html">Add new team</a><br/>
                     <a href="${pageContext.request.contextPath}/team/list.html">Team list</a><br/>
+              --%>
                     <a href="${pageContext.request.contextPath}/customers/list.html">Customers list</a><br/>
                     <a href="${pageContext.request.contextPath}/bootHome.html">bootHome page</a><br />
-                    <a href="${pageContext.request.contextPath}/user.html?login=login">Login on home page</a>
+                    
+                    
+               <%--     <a href="${pageContext.request.contextPath}/user.html?login=login">Login on home page</a> --%>
                 </p>
             </div>
             <!-- end .sidebar2 -->

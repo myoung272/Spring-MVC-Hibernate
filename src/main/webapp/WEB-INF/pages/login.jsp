@@ -30,7 +30,7 @@
                             <td>Password:</td>
                             <td> <form:password path="password"/></td>
 
-                            <td><input type="submit" value="Submit"/></td>
+                            <td><input type="submit" value="Submit" class="btn btn-primary btn-sm"/></td>
                             <td></td>
                         </tr>
                     </tbody>

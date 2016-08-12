@@ -155,7 +155,16 @@
         </script>
     </head>
     <body>
-             <div class="container-fluid">
+        <c:choose>
+       <c:when test="${empty uBean or !uBean.getRole().getRole().equalsIgnoreCase('admin') }">
+            <h2 align="center">Super Mario Spring MVC Hibernate 4.0</h2>
+            <h3 align=" center"><font style="color: red" >You must be logged in as an admin to view this page.</font>  <a href="${pageContext.request.contextPath}/user.html?login=login">Login</a> </h3>
+           
+       </c:when>
+           <c:otherwise>
+            
+           
+           <div class="container-fluid">
     <!--    <div class="row"> -->
         <%@ include file="/WEB-INF/pages/bootstrapHeader.jspf" %>
     <!--    </div> -->
@@ -293,10 +302,10 @@
               </c:if>
                 <c:if test="${!empty  custs}"> 
               
-     <div class="catItems  table-responsive">
+     <div class="catItems container table-responsive">
                
                    
-                       <table id="tbMenuItems" class="catItems stripe display compact" cellspacing="0" width="100%" >
+                       <table id="tbMenuItems" class="table catItems stripe display compact" cellspacing="0"  >
                             <thead>
                                 <tr bgcolor ="#ecf2f9" >
                                     <!-- <th class="header">Product ID</td> -->
@@ -372,11 +381,13 @@
             </div>
                 </c:if>
                  
-            <div class="row">
+            <div>
                 <p style="float:right"
                    ${message} <c:out value="${pageContext.request.contextPath}"/><br/>
                 </p>
             </div>
         </div>
+           </c:otherwise>
+        </c:choose>
     </body>
 </html>

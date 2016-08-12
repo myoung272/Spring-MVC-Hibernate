@@ -1,0 +1,82 @@
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="row"> 
+    <nav class="navbar-custom navbar-inverse ">
+     <!--   <div class="container-fluid"> -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+             
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">  <a href="${pageContext.request.contextPath}/index.html">Home</a><br /></li>
+                    <li class="active">  <a href="${pageContext.request.contextPath}/about.html">About</a><br /></li>
+                    <!--
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li class="active"><a href="${pageContext.request.contextPath}/admin/orders.html">All Open Orders</a></li> 
+                               <li class="active"><a href="${pageContext.request.contextPath}/findOrders.html?ordersToFind=2">Orders Completed Today</a></li>
+                        </ul>
+                        
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin Settings
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                        <li class="active"> <a href="${pageContext.request.contextPath}/adminOrderTimes.html">Set Order Hours</a></li>
+                               <li class="active"><a href="${pageContext.request.contextPath}/turnOnOff.html">Turn Ordering On/Off</a></li>
+                        </ul>
+                        
+                    <li class="active"> <a href="${pageContext.request.contextPath}/adminOrderTimes.html">Set Order Hours</a></li>
+                    <li class="active"><a href="${pageContext.request.contextPath}/customers/list.html">Customers list</a></li>
+                    
+                    
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Login/Register
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li class="active" >  <a href="${pageContext.request.contextPath}/user.html?login=login">Login</a> </li>
+                               <li class="active"><a href="${pageContext.request.contextPath}/regUser.html?reg=reg">Register</a></li>
+                        </ul>
+                 -->
+                 
+                </ul>
+                   <ul class="nav navbar-nav navbar-right">
+                        <c:if test="${uBean.role.role eq 'admin'}">
+                            <li class="active"><a href="${pageContext.request.contextPath}/addMenuItem.html">Admin Pages</a> </li>
+                        </c:if>
+                  <%--       <c:if test="${!empty uBean}">
+                             <li class="active"><a href="${pageContext.request.contextPath}/order/custOrder.html">My Orders</a></li> 
+                          </c:if>
+                  --%>
+                     
+                         <c:choose>
+                             <c:when test="${!empty uBean}">
+                                    <li class="active"><a href="${pageContext.request.contextPath}/regUser.html?reg=reg">My Account</a></li>
+                          <li class="active"><a href="${pageContext.request.contextPath}/logOut.html">Log Out</a></li>
+                         </c:when>
+                         <c:otherwise>
+                           <li class="active"><a href="${pageContext.request.contextPath}/regUser.html?reg=reg">Register</a></li>
+                       <li class="active"><a href="${pageContext.request.contextPath}/user.html?login=login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                          </c:otherwise>
+                         </c:choose>
+                   </ul>
+                
+            </div>
+            <div class="dropdown">
+                <!-- Link or button to toggle dropdown -->
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a tabindex="-1" href="#">Action</a></li>
+                    <li><a tabindex="-1" href="#">Another action</a></li>
+                    <li><a tabindex="-1" href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="#">Separated link</a></li>
+                </ul>
+            </div>
+   <!--     </div> -->
+    </nav>
+</div> 

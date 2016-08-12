@@ -9,6 +9,8 @@ public interface CustomersDAO {
     
     public List<Customers> getCustomers();
     
+      public List<Customers> getAdminSmsNumbers();
+    
     public Customers getUser(String email, String pWord);
     
     public void updateCustomers(Customers cust);

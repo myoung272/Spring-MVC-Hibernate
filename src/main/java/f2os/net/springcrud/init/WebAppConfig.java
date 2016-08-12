@@ -44,7 +44,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter { // M.Y. added WebMvc
     
     @Override // M.Y. added
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/css", "/resouces/images");
+    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/css", "/resouces/images", "/resouces/tmp");
     System.out.println("******** IN CLASS WebAppConfig.addResurceHandlers *****************" );
     }
    

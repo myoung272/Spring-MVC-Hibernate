@@ -71,7 +71,7 @@ public class OrderController {
         }
         System.out.println("orderList from getMenuItem  is " + orderList);
 
-        return "home"; // return type was string also
+        return "bootHome"; // return type was string also
      //  return model; 
     }
     // REMOVES ITEM FROM ORDER LIST
@@ -81,7 +81,7 @@ public class OrderController {
         orderList.remove(m);
         model.addAttribute("orderLineItems", orderList);
         System.out.println("orderList from removeMenuItem  is " + orderList);
-        return "home";
+        return "bootHome";
     }
      
     // UPDATES ORDER QUANTITY
@@ -117,12 +117,12 @@ public class OrderController {
         model.addAttribute("orderTotals", ots);
         }
         System.out.println("model as map " + model.asMap().keySet());
-        return "home";
+        return "bootHome";
     }
     // DISPLAYS CUSTOMERS ORDER(S) PLACED TODAY
      @RequestMapping(value = "/custOrder", method = RequestMethod.GET)
      public ModelAndView getCustTodayOrders(Model model, HttpSession session) {
-         ModelAndView modelAndView = new ModelAndView("home");
+         ModelAndView modelAndView = new ModelAndView("bootHome");
           Customers user = (Customers) session.getAttribute("uBean");
           System.out.println("User id is: "+user.getCustId());
           List<Orders> custTodayOrders = new ArrayList();
@@ -147,8 +147,13 @@ public class OrderController {
      // SHOW SINGLE ORDER DETAILS 
       @RequestMapping(value = "/custOrder/{id}", method = RequestMethod.GET)
      public ModelAndView showOrderDetails(Model model, @PathVariable int id, HttpSession session) {
+       
            Customers user = (Customers) session.getAttribute("uBean");
-           ModelAndView modelAndView = new ModelAndView("home");
+           if(user == null){
+              ModelAndView modelAndView = new ModelAndView("bootHome"); 
+               return modelAndView;
+           }
+           ModelAndView modelAndView = new ModelAndView("bootHome");
           
            if(user.getRole().getRole().equalsIgnoreCase("admin")){
             modelAndView.setViewName("adminOrders");
@@ -165,7 +170,7 @@ public class OrderController {
     public ModelAndView saveOrder(Model model, @PathVariable int id,@RequestParam String pickOrDel,
     @RequestParam double orderTotal, @RequestParam String comments, @RequestParam String userEmail, HttpSession session) {
          System.out.println("pickOrDel  is" +pickOrDel);
-         ModelAndView modelAndView = new ModelAndView("home");
+         ModelAndView modelAndView = new ModelAndView("bootHome");
        OrderHours  ohs = (OrderHours) getServletContext().getAttribute("orderHours"); // this bean is loaded into cache at server startup.
         boolean orderOn = CheckOrderTimes.checkOrderTimes(ohs);
         if(orderOn == false){
@@ -236,8 +241,9 @@ public class OrderController {
         modelAndView.addObject("placedOrder", placedOrder);
         modelAndView.addObject("order", order);
         orderList.clear();
-        System.out.println("placedOrder contains " + placedOrder);
-        String smsNum = "7322410646"; //replace with properties file
+       ArrayList<Customers> adminSmsNums = (ArrayList<Customers>) customerService.getAdminSmsNumbers();
+       
+        String smsNum =   adminSmsNums.get(0).getSmsPhone(); 
         //Send sms to admin in new thread
         Runnable smsJob = new SendSmsRunnable("New Order Received from Super Mario Pizza, Check the web site! order#  " + order.getOrderId(), smsNum);
         Thread smsMessage = new Thread(smsJob);

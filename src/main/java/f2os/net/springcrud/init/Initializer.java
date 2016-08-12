@@ -26,11 +26,12 @@ public class Initializer implements WebApplicationInitializer {
 
 		Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
 		servlet.addMapping("/");
-                                     servlet.setMultipartConfig(new MultipartConfigElement("C:\\tmp", 1024*1024*5, 1024*1024*5*5, 1024*1024));
+                            //         servlet.setMultipartConfig(new MultipartConfigElement("C:\\tmp", 1024*1024*5, 1024*1024*5*5, 1024*1024)); 
+                            servlet.setMultipartConfig(new MultipartConfigElement("", 1024*1024*5, 1024*1024*5*5, 1024*1024));
 		servlet.setLoadOnStartup(1);
                 
                 
-                
+                 
                 System.out.println("******** IN CLASS INITIALIZER *****************" );
               
 	}

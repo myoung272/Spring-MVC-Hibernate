@@ -36,10 +36,16 @@ public class LinkController {
         ModelAndView modelAndView = new ModelAndView("bootHome");
         return modelAndView;
     }
+      
+      @RequestMapping(value = "/about")
+      public ModelAndView about() {        
+      ModelAndView modelAndView = new ModelAndView("about");
+        return modelAndView;
+      }
     
 
     public ModelAndView catsCache() {
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("bootHome");
         catSet = (TreeSet<Menu>) getServletContext().getAttribute("cats");
         orderTimes = (OrderHours) getServletContext().getAttribute("orderHours");
         LocalDateTime dt = LocalDateTime.now();

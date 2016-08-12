@@ -28,7 +28,7 @@ public class MenuController {
     // @ResponseBody // this was added for AJAX call, does not seem needed
     public @ResponseBody ModelAndView menuCategory(@PathVariable String cat) {
         System.out.println("In MenuController.menuCategory  cat is " + cat);
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("bootHome");
         List<Menu> menu = (List<Menu>) servletContext.getAttribute("menu");
         List<Menu> menuItems = new ArrayList<>();
 

@@ -3,7 +3,8 @@
 
 /* BOOTSTRAP CUSTOM */
    /* Remove the navbar's default margin-bottom and rounded borders */ 
-            .navbar {
+        
+   /*.navbar {
                 margin-bottom: 0;
                 border-radius: 0;
             }
@@ -23,6 +24,7 @@
 .navbar-custom .navbar-brand {
     color:#eeeeee;
 }
+   */
 
             /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
             .row.content {height: 450px}
@@ -52,18 +54,16 @@
 
 
 
-/* ~~ Element/tag selectors ~~ */
-dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
-    padding: 10;
-    margin: 10;
+/* ~
 }
-h1, h2, h5, h6, p {
-    margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+/* h1, h2, h5, h6, p {
+    margin-top: 0;	
     padding-right: 15px;
-    padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+    padding-left: 15px; 
 }
+*/
 
- body {
+ /* body {
     background: #FFF;
     margin: 0;
     padding: 0;
@@ -73,9 +73,10 @@ h1, h2, h5, h6, p {
     line-height: 1.4;
 
 }
+ */
 
 
-h4 {
+/* h4 {
     margin: 0 0 10px 0;
     padding: 0 0 5px 0;
     font-size: 18px;
@@ -88,13 +89,14 @@ h3 {
     font-weight: bold;
     color:#C6A36F
 }
+*/
 
 a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
     border: none;
 }
 
 /* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link, a:visited { color: #631c00; text-decoration: none; font-weight: normal; } 
+ a:link, a:visited { color: #999999; text-decoration: none; font-weight: normal; } 
 a:active, a:hover { color: #000000; text-decoration: underline; }
 
 
@@ -106,18 +108,20 @@ a:active, a:hover { color: #000000; text-decoration: underline; }
 } 
 
 /* ~~ The header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo. ~~ */
-.nb {
+/*.nb {
     display: none;
     padding: 5px;
     background-color: #C2F9FF;
     border: 1px solid #000;
 }
+*/
 
-table.center {
+/* table.center {
     margin-left:auto; 
     margin-right:auto;
-  /*  width:955px ; */
+   width:955px ; 
 }
+*/
 
 
 
@@ -174,7 +178,7 @@ table.center {
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
-    color: #cc3333;
+  /*  color: #cc3333; */
 }
 
 
@@ -183,15 +187,8 @@ table.center {
 }
 
 
-.sidebar1 {
-    float: left;
-    width: 176px;
-    background: #fff;
-/*    border:1px solid #009900; */
-    /*border-radius:5px;
--moz-border-radius:5px;*/ /* Firefox 3.6 and earlier */
-    /* padding-bottom: 10px;*/
-}
+
+
 .content {
     padding: 10px 0;
  /*   width: 570px;  */
@@ -264,10 +261,11 @@ table.confirmation{
     color: #cc3333;
 }
 .sidebar2 {
+     margin-top: 0;
     float: right;
-    width: 210px;
+   /* width: 210px; */
     background: #fff;
-    border:1px solid #009900;
+    border:1px solid #009900; 
     padding: 10px 0;
     font-size:12px;
 
@@ -277,24 +275,36 @@ table.orderTimes {
     color:#C6A36F;
 }
 
-table#categories{
-    width: 100%;
-    border-collapse:collapse;
+.sidebar1 {
+    float: left;
+ /*   width: 176px;  */
+    background: #fff;
+/*    border:1px solid #009900; */
+    /*border-radius:5px;
+-moz-border-radius:5px;*/ /* Firefox 3.6 and earlier */
+    /* padding-bottom: 10px;*/
 }
 
+ table#categories{
+    width: 100%;
+ /*  border-collapse:collapse; */
+}
+
+
 table#categories td, th { 
-    border: 1px #009900 solid;
+/*   border: 1px #009900 solid;  */
     padding-left: 5px; 
+   
 }
 
 #catHeader{
-    background-color:#F00;
+    background-color:#00aaff;
     color:#FFFFFF;
     text-align:center;
 }
 
 .catRow {
-    background-color: #FFF; border: 1px #000000 solid;
+/*   background-color: #FFF; border: 1px #000000 solid; */
 } 
 
 .catRow:hover a{  /* Originaly I used .catRow a:hover which would change the link color 

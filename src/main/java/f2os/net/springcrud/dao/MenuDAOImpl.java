@@ -66,7 +66,7 @@ public class MenuDAOImpl implements MenuDAO {
     }
     
     public void setAllMenuItemsInactive() {
-        getCurrentSession().createSQLQuery("UPDATE MENU SET active = 1 WHERE active = 0").executeUpdate(); 
+        getCurrentSession().createSQLQuery("UPDATE menu SET active = 1 WHERE active = 0").executeUpdate(); 
     }
     
     

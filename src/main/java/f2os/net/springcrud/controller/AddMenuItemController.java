@@ -12,7 +12,6 @@ import f2os.net.springcrud.util.SortMenu;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -26,9 +25,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
+ 
 
 @Controller
 @RequestMapping(value = "/addMenuItem")
@@ -104,15 +104,17 @@ public class AddMenuItemController implements ServletContextAware {
     }
      
     // UPLOAD MENU FROM EXCEL SHEET
-     @RequestMapping(value = "/uploadEx", method = RequestMethod.POST)
-    public ModelAndView uploadExcelToDB(@ModelAttribute FileBucket fb) throws Exception {
+    
+    @RequestMapping(value = "/uploadEx", method = RequestMethod.POST)
+    public ModelAndView uploadExcelToDB(@ModelAttribute FileBucket fb)  {
       ModelAndView modelAndView = new ModelAndView("redirect:/");
-      menuService.setAllMenuItemsInactive();
+   try { 
      System.out.println("In handelFormUpload file name is: "+fb);
     ByteArrayInputStream bis = new ByteArrayInputStream(fb.getFile().getBytes());
      Workbook workbook;
      Sheet sheet;
-      try {
+ 
+            menuService.setAllMenuItemsInactive();
             if (fb.getFile().getOriginalFilename().endsWith("xls")) {
                 workbook = new HSSFWorkbook(bis);
               sheet = workbook.getSheetAt(0);
@@ -138,7 +140,7 @@ public class AddMenuItemController implements ServletContextAware {
                    
                  switch (cell.getCellType()) {
                 case Cell.CELL_TYPE_STRING:
-                    System.out.println(cell.getRichStringCellValue().getString());
+                 //   System.out.println(cell.getRichStringCellValue().getString());
                     switch(cell.getColumnIndex()){
                         case  0:
                             menu.setCategory(cell.getRichStringCellValue().getString());
@@ -155,31 +157,38 @@ public class AddMenuItemController implements ServletContextAware {
                     } //  1st nested switch
                     break;
                 case Cell.CELL_TYPE_NUMERIC:
-                        System.out.println(cell.getNumericCellValue());
+                  //      System.out.println(cell.getNumericCellValue());
                          switch(cell.getColumnIndex()){
                              case 4:
                                  menu.setPrice(new BigDecimal(cell.getNumericCellValue()));
                                  break;
                           
-                          /*   case 5:
-                                 Double active = cell.getNumericCellValue();
-                                 menu.setActive(active.intValue());
-                                 break;
-                          */
+                        
                          } // end 2nd nested switch
                     break;
                 default:
-                    System.out.println();
+                   
             } // end outer switch
                   } // end while
-                  
+                   
                   menu.setActive(0);
+                  try{
                    menuService.saveMenuItem(menu);
-              }
-            }
+                  } catch(Exception e){
+                     //  e.printStackTrace();
+                       String error = "<b>"+" An error has ocured trying to load the spread sheet. The sheet you submited may not be in the proper format. See the below error message:" +"</b> <br><br>";
+                       modelAndView.addObject("message", error + e.getMessage());
+                         reloadMenuAndCatList();
+                       modelAndView.setViewName("addMenuItem");
+                       return modelAndView;
+                  }
+              } // End if to skip header row
+            } // End  for loop iterating rows
 
         } catch (IOException e) {
-            e.printStackTrace();
+           e.printStackTrace();
+           //  modelAndView.addObject("message", e.getMessage());
+            return modelAndView;
         }
       // Reload Menu and catList after new menu item added
        reloadMenuAndCatList();

@@ -1,7 +1,8 @@
 <!-- class="catItems myOrderInfo" 
 <div class="divTD"> -->
-<div class="catItems container" >
-<table >
+ <!-- <div class="catItems container" > -->
+   <div class="row table-responsive" style="float: none">
+                <table class="table" align="center">
     <tr>
         <td colspan="10" style=" text-align: left;">
             <form method="get" action="${pageContext.request.contextPath}/findOrders">
@@ -114,7 +115,7 @@
     </tr>
 
 </table>
-    
-</div>
+  </div>
+
     
     

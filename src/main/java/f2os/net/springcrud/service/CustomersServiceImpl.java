@@ -20,6 +20,10 @@ public class CustomersServiceImpl implements CustomersService {
         return customersDAO.getCustomers();        
     }
     
+      public List<Customers> getAdminSmsNumbers(){
+          return customersDAO.getAdminSmsNumbers();
+      }
+    
     public Customers getUser(String email, String pWord) {
         return customersDAO.getUser(email, pWord);
     }

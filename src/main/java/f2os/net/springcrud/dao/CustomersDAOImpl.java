@@ -25,6 +25,13 @@ public class CustomersDAOImpl implements CustomersDAO {
 		return getCurrentSession().createQuery("from Customers").list();
 	}
         
+        public List<Customers> getAdminSmsNumbers() {
+            return  getCurrentSession().createSQLQuery("select c.*, r.role_id  from customers c, roles r \n" +
+"where role = 'admin'\n" +
+"and c.CUST_ID = r.role_id").addEntity(Customers.class).list();
+            
+        }
+        
    /*      public  Menu getMenuItem(Integer productId){
      return (Menu) getCurrentSession().createSQLQuery("SELECT * from menu m where m.product_id = :productId and m.active = 1")
     .addEntity(Menu.class)

@@ -43,7 +43,7 @@ public class MenuServiceImpl implements  MenuService {
          menuDAO.removeMenuItem(id);
      }
             
-    
+  
     public  void setAllMenuItemsInactive() {
         menuDAO.setAllMenuItemsInactive();
     }
